@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-export HOST_HOME="/home/jeng-yuantsai"
+export HOST_HOME="/home/tsai"
 
 
 docker run -d \
