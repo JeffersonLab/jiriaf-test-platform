@@ -7,7 +7,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'vk-ejfat'
+  - job_name: 'vk-1'
     scheme: https
     static_configs:
       - targets: ['localhost:10250']
@@ -19,14 +19,18 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:1776']
 
-  - job_name: 'ersap'
+  - job_name: 'ersap1'
     static_configs:
-    - targets: ['localhost:2221']
-
-  - job_name: 'stress'
-    static_configs:
-    - targets: ['localhost:12345']
+    - targets: ['localhost:12221']
   
-  - job_name: 'ejfat'
+  - job_name: 'ersap2'
     static_configs:
-    - targets: ['localhost:8080']
+    - targets: ['localhost:22221']
+
+  - job_name: 'ejfat1'
+    static_configs:
+    - targets: ['localhost:18080']
+
+  - job_name: 'ejfat2'
+    static_configs:
+    - targets: ['localhost:28080']
