@@ -3,34 +3,34 @@ global:
   scrape_timeout: 20s  
 
 scrape_configs:
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']
+  # - job_name: 'prometheus'
+  #   static_configs:
+  #     - targets: ['localhost:9090']
 
   - job_name: 'vk-1'
     scheme: https
     static_configs:
-      - targets: ['localhost:10250']
+      - targets: ['localhost:10001']
     metrics_path: /metrics/resource
     tls_config:
       insecure_skip_verify: true
 
   - job_name: 'ersap-process-exporter'
     static_configs:
-      - targets: ['localhost:1776']
+      - targets: ['localhost:11776']
 
   - job_name: 'ersap1'
     static_configs:
     - targets: ['localhost:12221']
   
-  - job_name: 'ersap2'
-    static_configs:
-    - targets: ['localhost:22221']
+  # - job_name: 'ersap2'
+  #   static_configs:
+  #   - targets: ['localhost:22221']
 
   - job_name: 'ejfat1'
     static_configs:
     - targets: ['localhost:18080']
 
-  - job_name: 'ejfat2'
-    static_configs:
-    - targets: ['localhost:28080']
+  # - job_name: 'ejfat2'
+  #   static_configs:
+  #   - targets: ['localhost:28080']
