@@ -24,7 +24,7 @@ spec:
       args: [""]
       env:
         - name: PGID_FILE
-          value: ~/100g/ersap{{.Value.name}}/containers/wf/pgid
+          value: ~/100g/ersap{{.Values.name}}/containers/wf/pgid
         - name: PROCESS_EXPORTER_PORT
           value: "1776"
 
