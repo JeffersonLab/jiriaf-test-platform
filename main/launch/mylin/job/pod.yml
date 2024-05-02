@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ersap
+  name: ersap2
   labels:
     app: ersap
   namespace: 100g
