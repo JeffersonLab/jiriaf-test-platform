@@ -52,7 +52,7 @@ spec:
         
   nodeSelector:
     kubernetes.io/role: agent
-    # kubernetes.io/hostname: vk-nersc1
+    kubernetes.io/hostname: vk-nersc1
   tolerations:
     - key: "virtual-kubelet.io/provider"
       value: "mock"
