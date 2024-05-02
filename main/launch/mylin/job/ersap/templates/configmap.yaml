@@ -19,7 +19,7 @@ data:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: prom{{ .Values.name }
+  name: prom{{ .Values.name }}
   namespace: 100g
   labels:
     app.kubernetes.io/managed-by: Helm
