@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: Helm
   annotations:
-    meta.helm.sh/release-name: {{ .Values.name }}
+    meta.helm.sh/release-name: ersap{{ .Values.name }}
     meta.helm.sh/release-namespace: 100g
 data:
   wf.sh: |
@@ -24,7 +24,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: Helm
   annotations:
-    meta.helm.sh/release-name: {{ .Values.name }}
+    meta.helm.sh/release-name: ersap{{ .Values.name }}
     meta.helm.sh/release-namespace: 100g
 data:
   prom.sh: |
