@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ersap{{.Values.name}}
+  name: ersap{{ .Values.name }}
   namespace: 100g
 spec:
   containers:
@@ -24,7 +24,7 @@ spec:
       args: [""]
       env:
         - name: PGID_FILE
-          value: ~/100g/ersap{{.Values.name}}/containers/wf/pgid
+          value: ~/100g/ersap{{ .Values.name }}/containers/wf/pgid
         - name: PROCESS_EXPORTER_PORT
           value: "1776"
 
@@ -39,10 +39,10 @@ spec:
   volumes:
     - name: wf
       configMap:
-        name: wf{{.Values.name}}
+        name: wf{{ .Values.name }}
     - name: prom
       configMap:
-        name: prom{{.Values.name}}
+        name: prom{{ .Values.name }}
         
   nodeSelector:
     kubernetes.io/role: agent
