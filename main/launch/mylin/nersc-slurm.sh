@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -N 2
+#SBATCH -N 1
 #SBATCH -C cpu
 #SBATCH -q debug
 #SBATCH -J 100g
@@ -8,9 +8,9 @@
 
 #run the application:
 
-for i in $(seq 1 2)
+for i in $(seq 1)
 do
-    srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/node-setup.sh $i &
+    srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/mylin/node-setup.sh $i &
 done
 
 wait
