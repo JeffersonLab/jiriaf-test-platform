@@ -10,7 +10,7 @@
 
 for i in $(seq 1 2)
 do
-    srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/node_general.sh $i &
+    srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/node-setup.sh $i &
 done
 
 wait
