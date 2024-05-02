@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: wf
+  name: wf{{ .Values.name }
   namespace: 100g
   labels:
     app.kubernetes.io/managed-by: Helm
@@ -19,7 +19,7 @@ data:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: prom
+  name: prom{{ .Values.name }
   namespace: 100g
   labels:
     app.kubernetes.io/managed-by: Helm

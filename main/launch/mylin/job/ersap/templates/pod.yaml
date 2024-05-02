@@ -39,10 +39,10 @@ spec:
   volumes:
     - name: wf
       configMap:
-        name: wf
+        name: wf{{.Values.name}
     - name: prom
       configMap:
-        name: prom
+        name: prom{{.Values.name}
         
   nodeSelector:
     kubernetes.io/role: agent
