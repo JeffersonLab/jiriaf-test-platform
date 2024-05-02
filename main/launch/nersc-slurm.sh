@@ -8,7 +8,9 @@
 
 #run the application:
 
-srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/node1.sh &
-srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/node2.sh &
+for i in $(seq 1 2)
+do
+    srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/node_general.sh $i &
+done
 
 wait
