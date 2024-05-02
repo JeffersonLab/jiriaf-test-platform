@@ -1,0 +1,22 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: wf
+  namespace: 100g
+data:
+  wf.sh: |
+    #!/bin/bash
+    # export LB_HOST=$1
+    # export PR_HOST=$2
+    shifter --image=docker:gurjyan/ersap:v0.1 -- /ersap/run-pipeline-node.sh
+
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: prom
+  namespace: 100g
+data:
+  prom.sh: |
+    #!/bin/bash
+    shifter --image=jlabtsai/process-exporter:pgid-go -V /proc:/host_proc --entrypoint
