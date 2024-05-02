@@ -9,7 +9,7 @@ data:
     # export LB_HOST=$1
     # export PR_HOST=$2
     
-    shifter --image=docker:gurjyan/ersap:v0.1 --entrypoint
+    shifter --image=docker:gurjyan/ersap:v0.1 -- /ersap/run-pipeline-node.sh
 
 ---
 kind: ConfigMap
