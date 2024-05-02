@@ -3,6 +3,11 @@ apiVersion: v1
 metadata:
   name: wf
   namespace: 100g
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: ersap
+    meta.helm.sh/release-namespace: 100g
 data:
   wf.sh: |
     #!/bin/bash
@@ -16,6 +21,11 @@ apiVersion: v1
 metadata:
   name: prom
   namespace: 100g
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: ersap
+    meta.helm.sh/release-namespace: 100g
 data:
   prom.sh: |
     #!/bin/bash
