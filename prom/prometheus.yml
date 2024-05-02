@@ -7,7 +7,7 @@ scrape_configs:
   #   static_configs:
   #     - targets: ['localhost:9090']
 
-  - job_name: 'j-vk-1'
+  - job_name: 'j-vk1'
     scheme: https
     static_configs:
       - targets: ['localhost:10001']
@@ -15,7 +15,7 @@ scrape_configs:
     tls_config:
       insecure_skip_verify: true
 
-  - job_name: 'j-ersap-process-exporter'
+  - job_name: 'j-ersap-process-exporter1'
     static_configs:
       - targets: ['localhost:11776']
 
@@ -23,14 +23,28 @@ scrape_configs:
     static_configs:
     - targets: ['localhost:12221']
   
-  # - job_name: 'ersap2'
-  #   static_configs:
-  #   - targets: ['localhost:22221']
-
   - job_name: 'vd-ejfat1'
     static_configs:
     - targets: ['localhost:18080']
 
-  # - job_name: 'ejfat2'
-  #   static_configs:
-  #   - targets: ['localhost:28080']
+
+
+  - job_name: 'j-vk2'
+    scheme: https
+    static_configs:
+      - targets: ['localhost:10002']
+    metrics_path: /metrics/resource
+    tls_config:
+      insecure_skip_verify: true
+
+  - job_name: 'j-ersap-process-exporter2'
+    static_configs:
+      - targets: ['localhost:21776']
+
+  - job_name: 'vd-ersap2'
+    static_configs:
+    - targets: ['localhost:22221']
+  
+  - job_name: 'vd-ejfat2'
+    static_configs:
+    - targets: ['localhost:28080']
