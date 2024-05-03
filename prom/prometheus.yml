@@ -17,15 +17,15 @@ scrape_configs:
 
   - job_name: 'j-ersap-process-exporter1'
     static_configs:
-      - targets: ['localhost:11776']
+      - targets: ['localhost:20001']
 
   - job_name: 'vd-ersap1'
     static_configs:
-    - targets: ['localhost:12221']
+    - targets: ['localhost:30001']
   
   - job_name: 'vd-ejfat1'
     static_configs:
-    - targets: ['localhost:18080']
+    - targets: ['localhost:40001']
 
 
 
@@ -39,12 +39,12 @@ scrape_configs:
 
   - job_name: 'j-ersap-process-exporter2'
     static_configs:
-      - targets: ['localhost:21776']
+      - targets: ['localhost:20002']
 
   - job_name: 'vd-ersap2'
     static_configs:
-    - targets: ['localhost:22221']
+    - targets: ['localhost:30002']
   
   - job_name: 'vd-ejfat2'
     static_configs:
-    - targets: ['localhost:28080']
+    - targets: ['localhost:40002']
