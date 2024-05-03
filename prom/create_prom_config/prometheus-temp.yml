@@ -3,6 +3,7 @@ global:
   scrape_timeout: 20s 
   external_labels:
     job: ersap-100g
-    num_proc_nodes: "25"
+    num_proc_nodes: "3"
     comupte_site: "nersc"
+    run_type: test
 

@@ -7,7 +7,7 @@ with open('/prom/prometheus-temp.yml', 'r') as file:
 data['scrape_configs'] = []
 
 # Loop from 1 to 25.
-for i in range(1, 26):
+for i in range(1, 4):
     # Format i as a two-digit number.
     i_padded = f"{i:02d}"
 
