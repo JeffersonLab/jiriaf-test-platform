@@ -5,7 +5,7 @@ for i in $(seq 1 25)
 do
     i_padded=$(printf "%02d" $i)
     echo $i_padded
-    helm template ersap$i /home/tsai/JIRIAF/JIRIAF-test-platform/main/launch/mylin/job/ersap --set name=$i_padded
+    helm template ersap$i ersap --set name=$i_padded
     sleep 5
 done
 
@@ -14,7 +14,7 @@ for i in $(seq 1 25)
 do
     i_padded=$(printf "%02d" $i)
     echo $i_padded
-    helm install ersap$i /home/tsai/JIRIAF/JIRIAF-test-platform/main/launch/mylin/job/ersap --set name=$i_padded
+    helm install ersap$i ersap --set name=$i_padded
     # sleep 30
 done
 
