@@ -20,4 +20,4 @@ data:
   prom.sh: |
     #!/bin/bash
     sleep {{ .Values.prometheus_settings.wait_time_before_start }}
-    shifter --image={{ .Values.prometheus_settings.image }} -- {{ .Values.prometheus_settings.cmd }}
+    shifter --image={{ .Values.prometheus_settings.image }} {{ .Values.prometheus_settings.cmd }}
