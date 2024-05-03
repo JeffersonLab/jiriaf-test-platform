@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#SBATCH -N 2
+#SBATCH -N 25
 #SBATCH -C cpu
-#SBATCH -q debug
+#SBATCH -q regular
 #SBATCH -J 100g
 #SBATCH -t 00:30:00
 
 #run the application:
 
-for i in $(seq 1 2)
+for i in $(seq 1 25)
 do
     i_padded=$(printf "%02d" $i)
     echo $i_padded
