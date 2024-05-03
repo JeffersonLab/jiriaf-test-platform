@@ -5,7 +5,7 @@ export APISERVER_PORT="35679"
 export NODENAME="vk-nersc$1"
 export KUBECONFIG="/global/homes/j/jlabtsai/run-vk/kubeconfig/$CONTROL_PLANE_IP"
 export VKUBELET_POD_IP="172.17.0.1"
-export KUBELET_PORT="1000$1"
+export KUBELET_PORT="100""$1"
 
 export JIRIAF_WALLTIME="0" # "0" if no limit
 export JIRIAF_NODETYPE="cpu"
@@ -18,9 +18,9 @@ ssh -NfL $APISERVER_PORT:localhost:$APISERVER_PORT login04
 ssh -NfR $KUBELET_PORT:localhost:$KUBELET_PORT mylin
 
 # start SSHs for other prometheus exporters
-export ersap_exporter="$1""2221"
-export process_exporter="$1""1776"
-export ejfat_exporter="$1""8080"
+export ersap_exporter="200""$1"
+export process_exporter="300""$1"
+export ejfat_exporter="400""$1"
 echo "ersap exporter: $ersap_exporter; process exporter: $process_exporter; ejfat exporter: $ejfat_exporter"
 
 ssh -NfR $ersap_exporter:localhost:2221 mylin
