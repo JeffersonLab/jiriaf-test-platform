@@ -15,7 +15,7 @@ echo "JRM: $NODENAME is running... on $HOSTNAME"
 
 # check if ssh tunnel is running, if not, start it as a follow
 ssh -NfL $APISERVER_PORT:localhost:$APISERVER_PORT login04
-ssh -NfR $KUBELET_PORT:localhost:$KUBELET_PORT mylin
+ssh -NfR $KUBELET_PORT:localhost:$KUBELET_PORT login04
 
 # start SSHs for other prometheus exporters
 export ersap_exporter="200""$1"
@@ -23,9 +23,9 @@ export process_exporter="300""$1"
 export ejfat_exporter="400""$1"
 echo "ersap exporter: $ersap_exporter; process exporter: $process_exporter; ejfat exporter: $ejfat_exporter"
 
-ssh -NfR $ersap_exporter:localhost:2221 mylin
-ssh -NfR $process_exporter:localhost:1776 mylin
-ssh -NfR $ejfat_exporter:localhost:8080 mylin
+ssh -NfR $ersap_exporter:localhost:2221 login04
+ssh -NfR $process_exporter:localhost:1776 login04
+ssh -NfR $ejfat_exporter:localhost:8080 login04
 
 
 ## echo walltime, nodetype, site

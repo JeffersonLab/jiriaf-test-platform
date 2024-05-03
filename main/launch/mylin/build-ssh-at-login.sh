@@ -15,13 +15,14 @@ export APISERVER_PORT="35679"
 for i in $(seq 1 25)
 do
     i_padded=$(printf "%02d" $i)
-    echo $i_padded
+    echo "100""$i_padded"
+    ssh -i ~/.ssh/nersc -J perlmutter -NfL "100""$i_padded":localhost:"100""$i_padded" jlabtsai@128.55.64.13
     echo "200""$i_padded"
-    # ssh -i ~/.ssh/nersc -J perlmutter -NfR "200""$i_padded":localhost:"200""$i_padded" jlabtsai@128.55.64.13
+    ssh -i ~/.ssh/nersc -J perlmutter -NfL "200""$i_padded":localhost:"200""$i_padded" jlabtsai@128.55.64.13
     echo "300""$i_padded"
-    # ssh -i ~/.ssh/nersc -J perlmutter -NfR "300""$i_padded":localhost:"300""$i_padded" jlabtsai@128.55.64.13
+    ssh -i ~/.ssh/nersc -J perlmutter -NfL "300""$i_padded":localhost:"300""$i_padded" jlabtsai@128.55.64.13
     echo "400""$i_padded"
-    # ssh -i ~/.ssh/nersc -J perlmutter -NfR "400""$i_padded":localhost:"400""$i_padded" jlabtsai@128.55.64.13
+    ssh -i ~/.ssh/nersc -J perlmutter -NfL "400""$i_padded":localhost:"400""$i_padded" jlabtsai@128.55.64.13
 done
 
 wait
