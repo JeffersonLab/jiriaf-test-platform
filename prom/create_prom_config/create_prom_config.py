@@ -1,8 +1,10 @@
 import yaml
 
 # Open the YAML file and load its contents.
-with open('prometheus-test.yml', 'r') as file:
+with open('/prom/prometheus-temp.yml', 'r') as file:
     data = yaml.safe_load(file)
+
+data['scrape_configs'] = []
 
 # Loop from 1 to 25.
 for i in range(1, 26):
@@ -32,9 +34,9 @@ for i in range(1, 26):
         }
     ]
 
-    # Add the new jobs to the scrape_configs key.
+    # Add the new jobs to the scrape_configs key
     data['scrape_configs'].extend(new_jobs)
 
 # Write the modified data back to the YAML file.
-with open('prometheus-test.yml', 'w') as file:
+with open('/prom/prometheus-out.yml', 'w') as file:
     yaml.safe_dump(data, file)

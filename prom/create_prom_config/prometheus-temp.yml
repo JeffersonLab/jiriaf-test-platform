@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 30s
+  scrape_timeout: 20s 
+  external_labels:
+    job: ersap-100g
+    num_proc_nodes: "25"
+    comupte_site: "nersc"
+
