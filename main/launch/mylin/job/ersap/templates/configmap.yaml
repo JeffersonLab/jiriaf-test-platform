@@ -2,22 +2,22 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: wf{{ .Values.name }}
-  namespace: 100g
+  namespace: {{ .Values.namespace }}
 data:
   wf.sh: |
     #!/bin/bash
     # export LB_HOST=$1
     # export PR_HOST=$2
-    shifter --image=docker:gurjyan/ersap:v0.1 -- /ersap/run-pipeline-node.sh
+    shifter --image={{ Values.ersap_settings.image }} -- {{ Values.ersap_settings.cmd }}
 
 ---
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: prom{{ .Values.name }}
-  namespace: 100g
+  namespace: {{ .Values.namespace }}
 data:
   prom.sh: |
     #!/bin/bash
-    sleep 8
-    shifter --image=jlabtsai/process-exporter:pgid-go -V /proc:/host_proc --entrypoint
+    sleep {{ .Values.prometheus_settings.wait_time_before_start }}
+    shifter --image={{ .Values.prometheus_settings.image }} -- {{ .Values.prometheus_settings.cmd }}

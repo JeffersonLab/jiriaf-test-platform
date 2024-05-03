@@ -1,1 +1,16 @@
 name: "1"
+namespace: 100g
+
+
+ersap_settings:
+  image: docker:gurjyan/ersap:v0.1
+  cmd: /ersap/run-pipeline-node.sh
+
+
+prometheus_settings:
+  image: jlabtsai/process-exporter:pgid-go
+  cmd: -V /proc:/host_proc --entrypoint
+  wait_time_before_start: 8
+  pgid_file_for_ersap: ~/100g/ersap{{ .Values.name }}/containers/wf/pgid
+  process_exporter_port: "1776"
+
