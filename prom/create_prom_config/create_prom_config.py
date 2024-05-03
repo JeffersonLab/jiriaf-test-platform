@@ -34,12 +34,12 @@ for i in range(1, num_proc_nodes + 1):
         },
         {
             'job_name': f'j-ersap-process-exporter-{i_padded}',
-            'static_configs': [{'targets': [f'localhost:200{i_padded}'], 'labels': global_labels.copy()}],
+            'static_configs': [{'targets': [f'localhost:300{i_padded}'], 'labels': global_labels.copy()}],
 
         },
         {
             'job_name': f'vd-ersap-{i_padded}',
-            'static_configs': [{'targets': [f'localhost:300{i_padded}'], 'labels': global_labels.copy()}],
+            'static_configs': [{'targets': [f'localhost:200{i_padded}'], 'labels': global_labels.copy()}],
         },
         {
             'job_name': f'vd-ejfat-{i_padded}',
