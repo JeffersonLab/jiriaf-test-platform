@@ -10,7 +10,9 @@
 
 for i in $(seq 1 2)
 do
-    srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/mylin/node-setup.sh $i &
+    i_padded=$(printf "%02d" $i)
+    echo $i_padded
+    srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/mylin/node-setup.sh $i_padded &
 done
 
 wait
