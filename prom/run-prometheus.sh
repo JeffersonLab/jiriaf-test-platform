@@ -10,7 +10,7 @@ docker run -d \
     --user "$(id -u)" \
     -v $HOST_HOME/JIRIAF/JIRIAF-test-platform/prom:/prometheus \
     -v $HOST_HOME/JIRIAF/prom-data/data:/prometheus/data \
-    prom/prometheus --config.file=/prometheus/prometheus.yml --storage.tsdb.path=/prometheus/data --storage.tsdb.retention.time=720d
+    prom/prometheus --config.file=/prometheus/prometheus.yml --storage.tsdb.path=/prometheus/data --storage.tsdb.retention.time=720d --web.enable-admin-api
 
 
       ## Manually open port 9090 in vscode
