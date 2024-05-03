@@ -15,7 +15,7 @@ do
     i_padded=$(printf "%02d" $i)
     echo $i_padded
     helm install ersap$i ersap --set name=$i_padded
-    sleep 30
+    # sleep 30
 done
 
 

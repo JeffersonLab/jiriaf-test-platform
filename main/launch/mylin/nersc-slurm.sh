@@ -4,7 +4,7 @@
 #SBATCH -C cpu
 #SBATCH -q regular
 #SBATCH -J 100g
-#SBATCH -t 00:30:00
+#SBATCH -t 01:00:00
 
 #run the application:
 
@@ -13,6 +13,7 @@ do
     i_padded=$(printf "%02d" $i)
     echo $i_padded
     srun -N1 /global/homes/j/jlabtsai/run-vk/slurm/mylin/node-setup.sh $i_padded &
+    sleep 60
 done
 
 wait
