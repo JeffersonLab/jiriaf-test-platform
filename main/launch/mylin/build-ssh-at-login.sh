@@ -7,4 +7,21 @@
 
 
 # run this on jiriaf2301 to login04 at nersc
-ssh -i ~/.ssh/nersc -J perlmutter -NfR :35679:localhost:35679 jlabtsai@128.55.64.13
+export APISERVER_PORT="35679"
+# ssh -i ~/.ssh/nersc -J perlmutter -NfR $APISERVER_PORT:localhost:$APISERVER_PORT jlabtsai@128.55.64.13
+
+
+
+for i in $(seq 1 25)
+do
+    i_padded=$(printf "%02d" $i)
+    echo $i_padded
+    echo "200""$i_padded"
+    # ssh -i ~/.ssh/nersc -J perlmutter -NfR "200""$i_padded":localhost:"200""$i_padded" jlabtsai@128.55.64.13
+    echo "300""$i_padded"
+    # ssh -i ~/.ssh/nersc -J perlmutter -NfR "300""$i_padded":localhost:"300""$i_padded" jlabtsai@128.55.64.13
+    echo "400""$i_padded"
+    # ssh -i ~/.ssh/nersc -J perlmutter -NfR "400""$i_padded":localhost:"400""$i_padded" jlabtsai@128.55.64.13
+done
+
+wait
