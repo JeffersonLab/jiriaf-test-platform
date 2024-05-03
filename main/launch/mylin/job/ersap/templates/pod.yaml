@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: ersap{{ .Values.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: "{{ .Values.namespace }}"
 spec:
   containers:
     - name: wf
@@ -24,9 +24,9 @@ spec:
       args: [""]
       env:
         - name: PGID_FILE
-          value: {{ .Values.prometheus_settings.pgid_file_for_ersap }}
+          value: "{{ .Values.prometheus_settings.pgid_file_for_ersap }}"
         - name: PROCESS_EXPORTER_PORT
-          value: {{ .Values.prometheus_settings.process_exporter_port }}
+          value: "{{ .Values.prometheus_settings.process_exporter_port }}"
 
       volumeMounts:
         - name: prom

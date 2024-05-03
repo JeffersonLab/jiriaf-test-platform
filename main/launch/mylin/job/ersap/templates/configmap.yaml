@@ -8,7 +8,7 @@ data:
     #!/bin/bash
     # export LB_HOST=$1
     # export PR_HOST=$2
-    shifter --image={{ Values.ersap_settings.image }} -- {{ Values.ersap_settings.cmd }}
+    shifter --image={{ .Values.ersap_settings.image }} -- {{ .Values.ersap_settings.cmd }}
 
 ---
 kind: ConfigMap
