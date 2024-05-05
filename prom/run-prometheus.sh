@@ -10,7 +10,6 @@ docker run -d \
     --user "$(id -u)" \
     -v $HOST_HOME/JIRIAF/JIRIAF-test-platform/prom:/prometheus \
     -v $HOST_HOME/JIRIAF/prom-data/data:/prometheus/data \
-    -v $HOST_HOME/JIRIAF/prom-data/snapshot:/prometheus/snapshots \
     prom/prometheus --config.file=/prometheus/prometheus.yml --storage.tsdb.path=/prometheus/data --storage.tsdb.retention.time=720d --web.enable-admin-api
 
 
