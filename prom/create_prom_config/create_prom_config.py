@@ -5,7 +5,7 @@ with open('/prom/prometheus-temp.yml', 'r') as file:
     data = yaml.safe_load(file)
 
 # num_proc_nodes
-num_proc_nodes = 25
+num_proc_nodes = 30
 
 # global labels
 global_labels = {
@@ -13,7 +13,7 @@ global_labels = {
     "num_proc_nodes": str(num_proc_nodes),
     "comupte_site": "nersc",
     "run_type": "production",
-    "run_date": "2024-05-02",
+    "run_date": "2024-05-06",
 }
 
 data['scrape_configs'] = []
