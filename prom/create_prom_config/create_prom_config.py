@@ -1,11 +1,12 @@
 import yaml
+import time
 
 # Open the YAML file and load its contents.
 with open('/prom/prometheus-temp.yml', 'r') as file:
     data = yaml.safe_load(file)
 
 # num_proc_nodes
-num_proc_nodes = 30
+num_proc_nodes = 40
 
 # global labels
 global_labels = {
@@ -13,7 +14,7 @@ global_labels = {
     "num_proc_nodes": str(num_proc_nodes),
     "comupte_site": "nersc",
     "run_type": "production",
-    "run_date": "2024-05-06",
+    "run_date": time.strftime("%Y-%m-%d"),
 }
 
 data['scrape_configs'] = []
