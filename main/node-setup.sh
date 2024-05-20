@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export CONTROL_PLANE_IP="jiriaf2301"
-export APISERVER_PORT="35679"
+export CONTROL_PLANE_IP="jiriaf2302" #"jiriaf2301"
+export APISERVER_PORT="38687" #35679
 export NODENAME="vk-nersc$1"
 export KUBECONFIG="/global/homes/j/jlabtsai/run-vk/kubeconfig/$CONTROL_PLANE_IP"
 export VKUBELET_POD_IP="172.17.0.1"
