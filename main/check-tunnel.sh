@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in $(seq 1 30)
+for i in $(seq 1 40)
 do
     i_padded=$(printf "%02d" $i)
     for prefix in 100 200 300 400
