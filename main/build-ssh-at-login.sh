@@ -12,7 +12,7 @@ ssh -i ~/.ssh/nersc -J perlmutter -NfR $APISERVER_PORT:localhost:$APISERVER_PORT
 
 
 
-for i in $(seq 1 30)
+for i in $(seq 1 40)
 do
     i_padded=$(printf "%02d" $i)
     echo "100""$i_padded"
