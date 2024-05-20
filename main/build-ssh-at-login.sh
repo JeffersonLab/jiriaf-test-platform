@@ -7,7 +7,7 @@
 
 
 # run this on jiriaf2301 to login04 at nersc
-export APISERVER_PORT="35679"
+export APISERVER_PORT="38687" #"35679"
 ssh -i ~/.ssh/nersc -J perlmutter -NfR $APISERVER_PORT:localhost:$APISERVER_PORT jlabtsai@128.55.64.13
 
 
