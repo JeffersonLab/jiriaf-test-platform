@@ -10,7 +10,7 @@ do
 done
 
 # gradually increase the number of ersap instances every 5 seconds
-for i in $(seq 1 30)
+for i in $(seq 1 40)
 do
     i_padded=$(printf "%02d" $i)
     echo $i_padded
