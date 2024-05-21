@@ -15,23 +15,29 @@ Pod:
 Service:
 - name: http1
   protocol: TCP
-  port: 80
+  port: 20041
   targetPort: 2221
   path: /metrics
   interval: 15s
 - name: http2
   protocol: TCP
-  port: 81
+  port: 20042
   targetPort: 1776
   path: /metrics
   interval: 15s
 - name: http3
   protocol: TCP
-  port: 82
+  port: 20043
   targetPort: 8080
   path: /metrics
   interval: 15s
-  
+- name: http4
+  protocol: TCP
+  port: 10041
+  targetPort: 10041
+  path: /resource/metrics
+  interval: 15s
+
 PersistentVolume:
   node: mylin-worker
   path: /var/local-path-provisioner
