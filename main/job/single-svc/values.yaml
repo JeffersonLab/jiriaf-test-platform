@@ -1,0 +1,43 @@
+Pod:
+  name: sample-exporter2
+  namespace: default
+
+  ersap_settings:
+    image: docker:gurjyan/ersap:v0.1
+    cmd: /ersap/run-pipeline-node.sh
+
+  prometheus_settings:
+    image: jlabtsai/process-exporter:pgid-go
+    cmd: -V /proc:/host_proc --entrypoint
+    wait_time_before_start: 8
+    process_exporter_port: "1776"
+
+Service:
+- name: http1
+  protocol: TCP
+  port: 80
+  targetPort: 2221
+  path: /metrics
+  interval: 15s
+- name: http2
+  protocol: TCP
+  port: 81
+  targetPort: 1776
+  path: /metrics
+  interval: 15s
+- name: http3
+  protocol: TCP
+  port: 82
+  targetPort: 8080
+  path: /metrics
+  interval: 15s
+  
+PersistentVolume:
+  node: mylin-worker
+  path: /var/local-path-provisioner
+  size: 10Gi
+Prometheus:
+  serviceaccount: prometheus-k8s
+  namespace: monitoring
+
+#https://github.com/prometheus-operator/kube-prometheus/blob/main/docs/customizations/monitoring-additional-namespaces.md
