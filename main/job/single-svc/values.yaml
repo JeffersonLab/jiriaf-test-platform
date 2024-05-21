@@ -1,5 +1,5 @@
 Pod:
-  name: sample-exporter2
+  name: ersap-test
   namespace: default
 
   ersap_settings:
@@ -13,34 +13,34 @@ Pod:
     process_exporter_port: "1776"
 
 Service:
-- name: http1
+- name:  ersap-exporter
   protocol: TCP
-  port: 20041
-  targetPort: 2221
+  port: 20059
+  targetPort: 20059
   path: /metrics
   interval: 15s
-- name: http2
+- name: process-exporter
   protocol: TCP
-  port: 20042
-  targetPort: 1776
+  port: 20060
+  targetPort: 20060
   path: /metrics
   interval: 15s
-- name: http3
+- name: ejfat-exporter
   protocol: TCP
-  port: 20043
-  targetPort: 8080
+  port: 20061
+  targetPort: 20061
   path: /metrics
   interval: 15s
-- name: http4
+- name: JRM-exporter
   protocol: TCP
-  port: 10041
-  targetPort: 10041
-  path: /resource/metrics
+  port: 10046
+  targetPort: 10046
+  path: /metrics/resource
   interval: 15s
 
 PersistentVolume:
-  node: mylin-worker
-  path: /var/local-path-provisioner
+  node: jiriaf2302-control-plane
+  path: /var/prom
   size: 10Gi
 Prometheus:
   serviceaccount: prometheus-k8s

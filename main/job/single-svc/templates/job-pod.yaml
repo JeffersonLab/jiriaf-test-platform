@@ -29,7 +29,7 @@ spec:
       args: [""]
       env:
         - name: PGID_FILE
-          value: "~/default/ersap{{ .Values.Pod.name }}/containers/wf/pgid"
+          value: "~/default/{{ .Values.Pod.name }}/containers/wf/pgid"
         - name: PROCESS_EXPORTER_PORT
           value: "{{ .Values.Pod.prometheus_settings.process_exporter_port }}"
       ports:
