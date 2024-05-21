@@ -11,13 +11,18 @@ spec:
       app: {{.Values.Pod.name}}
   endpoints: [
     {{- range $index, $element := .Values.Service }}
-    {{- if $index }},{{ end }}
-    {
-      port: {{ $element.name | quote }},
-      interval: {{ $element.interval | quote }},
-      path: {{ $element.path | quote }}
-    }
-    {{- end }}
+        {{- if $index }},{{ end }}
+        {
+          port: {{ $element.name | quote }},
+          interval: {{ $element.interval | quote }},
+          path: {{ $element.path | quote }},
+          {{- if eq $element.name "JRM-exporter" }}
+          tlsConfig: {
+            insecureSkipVerify: false
+          }
+          {{- end }}
+        }
+        {{- end }}
   
   ]
   # - port: http1
