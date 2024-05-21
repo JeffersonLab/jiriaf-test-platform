@@ -19,11 +19,11 @@ spec:
           {{- if eq $element.name "JRM-exporter" }}
           tlsConfig: {
             insecureSkipVerify: false
-          }
+          },
+          scheme: "https"
           {{- end }}
         }
         {{- end }}
-  
   ]
   # - port: http1
   #   interval: 15s
