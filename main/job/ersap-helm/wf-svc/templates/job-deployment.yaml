@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.Pod.name}}
-  namespace: {{ .Values.Pod.namespace}}
+  name: {{ .Values.Deployment.name}}
+  namespace: {{ .Values.Deployment.namespace}}
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: {{ .Values.Pod.name}}
+      app: {{ .Values.Deployment.name}}
   template:
     metadata:
       labels:
-        app: {{ .Values.Pod.name}}
+        app: {{ .Values.Deployment.name}}
     spec:
       containers:
         - name: wf
@@ -45,10 +45,10 @@ spec:
       volumes:
         - name: wf
           configMap:
-            name: wf-{{ .Values.Pod.name}}
+            name: wf-{{ .Values.Deployment.name}}
         - name: prom
           configMap:
-            name: prom-{{ .Values.Pod.name}}
+            name: prom-{{ .Values.Deployment.name}}
 
       nodeSelector:
         kubernetes.io/role: agent

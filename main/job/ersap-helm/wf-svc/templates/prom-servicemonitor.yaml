@@ -1,14 +1,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{.Values.Pod.name}}
-  namespace: {{.Values.Pod.namespace}}
+  name: {{.Values.Deployment.name}}
+  namespace: {{.Values.Deployment.namespace}}
   labels:
-    app: {{.Values.Pod.name}}
+    app: {{.Values.Deployment.name}}
 spec:
   selector:
     matchLabels:
-      app: {{.Values.Pod.name}}
+      app: {{.Values.Deployment.name}}
   endpoints: [
     {{- range $index, $element := .Values.Service }}
         {{- if $index }},{{ end }}

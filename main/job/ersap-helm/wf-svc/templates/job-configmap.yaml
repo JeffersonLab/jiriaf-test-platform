@@ -1,34 +1,34 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: wf-{{ .Values.Pod.name }}
-  namespace: {{ .Values.Pod.namespace }}
+  name: wf-{{ .Values.Deployment.name }}
+  namespace: {{ .Values.Deployment.namespace }}
 data:
   wf.sh: |
     #!/bin/bash
     # export LB_HOST=$1
     # export PR_HOST=$2
-    shifter --image={{ .Values.Pod.ersap_settings.image }} -- {{ .Values.Pod.ersap_settings.cmd }}
+    shifter --image={{ .Values.Deployment.ersap_settings.image }} -- {{ .Values.Deployment.ersap_settings.cmd }}
 
 ---
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: prom-{{ .Values.Pod.name }}
-  namespace: {{ .Values.Pod.namespace }}
+  name: prom-{{ .Values.Deployment.name }}
+  namespace: {{ .Values.Deployment.namespace }}
 data:
   prom.sh: |
     #!/bin/bash
-    for dir in $(ls -t ~/{{ .Values.Pod.namespace }}/)
+    for dir in $(ls -t ~/{{ .Values.Deployment.namespace }}/)
     do
-      if [ -d ~/{{ .Values.Pod.namespace }}/$dir ]
+      if [ -d ~/{{ .Values.Deployment.namespace }}/$dir ]
       then
         # read the pgid file
-        export PGID_FILE=~/{{ .Values.Pod.namespace }}/$dir/containers/wf/pgid
+        export PGID_FILE=~/{{ .Values.Deployment.namespace }}/$dir/containers/wf/pgid
         echo "PGID_FILE: $PGID_FILE"
         break
       fi
     done
 
-    sleep {{ .Values.Pod.prometheus_settings.wait_time_before_start }}
-    shifter --image={{ .Values.Pod.prometheus_settings.image }} {{ .Values.Pod.prometheus_settings.cmd }}
+    sleep {{ .Values.Deployment.prometheus_settings.wait_time_before_start }}
+    shifter --image={{ .Values.Deployment.prometheus_settings.image }} {{ .Values.Deployment.prometheus_settings.cmd }}

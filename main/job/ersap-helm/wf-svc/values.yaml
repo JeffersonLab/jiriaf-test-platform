@@ -1,4 +1,4 @@
-Pod:
+Deployment:
   name: ersap-test
   namespace: default
 
@@ -10,7 +10,6 @@ Pod:
     image: jlabtsai/process-exporter:pgid-go
     cmd: -V /proc:/host_proc --entrypoint
     wait_time_before_start: 8
-    process_exporter_port: "1776"
 
 Service:
 - name:  ersap-exporter

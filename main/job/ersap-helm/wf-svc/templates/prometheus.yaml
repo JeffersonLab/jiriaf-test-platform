@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: {{ .Values.Pod.name}}
+  name: {{ .Values.Deployment.name}}
   namespace: {{ .Values.Prometheus.namespace}}
   labels:
     app.kubernetes.io/component: prometheus
@@ -29,7 +29,7 @@ spec:
       kubernetes.io/metadata.name: {{ .Values.Namespace}}
   serviceMonitorSelector: 
     matchLabels:
-      app: {{ .Values.Pod.name}}
+      app: {{ .Values.Deployment.name}}
   version: 2.32.1
   storage:
     volumeClaimTemplate:
