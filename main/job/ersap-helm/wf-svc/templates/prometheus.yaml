@@ -26,7 +26,7 @@ spec:
   # serviceMonitorNamespaceSelector: {} #match all namespaces
   serviceMonitorNamespaceSelector:
     matchLabels:
-      kubernetes.io/metadata.name: {{ .Values.Namespace}}
+      kubernetes.io/metadata.name: {{ .Values.Deployment.namespace}}
   serviceMonitorSelector: 
     matchLabels:
       app: {{ .Values.Deployment.name}}
