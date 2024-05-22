@@ -14,31 +14,60 @@ Pod:
 
 Service:
 - name:  ersap-exporter
+  node: 0
   protocol: TCP
-  port: 20065
-  targetPort: 20065
+  port: 20050
   originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
+  node: 0
   protocol: TCP
-  port: 20066
-  targetPort: 20066
+  port: 20051
   originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
+  node: 0
   protocol: TCP
-  port: 20067
-  targetPort: 20067
+  port: 20052
   originalPort: 8080
   path: /metrics
   interval: 15s
 - name: jrm-exporter
+  node: 0
   protocol: TCP
-  port: 10048
-  targetPort: 10048
-  originalPort: 10048
+  port: 10043
+  originalPort: 10043
+  path: /metrics/resource
+  interval: 15s
+
+- name:  ersap-exporter
+  node: 1
+  protocol: TCP
+  port: 20053
+  originalPort: 2221
+  path: /metrics
+  interval: 15s
+- name: process-exporter
+  node: 1
+  protocol: TCP
+  port: 20054
+  originalPort: 1776
+  path: /metrics
+  interval: 15s
+- name: ejfat-exporter
+  node: 1
+  protocol: TCP
+  port: 20055
+  originalPort: 8080
+  path: /metrics
+  interval: 15s
+- name: jrm-exporter
+  node: 1
+  protocol: TCP
+  port: 10044
+  originalPort: 10044
   path: /metrics/resource
   interval: 15s
 

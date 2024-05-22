@@ -19,24 +19,16 @@ metadata:
 data:
   prom.sh: |
     #!/bin/bash
-    sleep {{ .Values.Pod.prometheus_settings.wait_time_before_start }}
-    shifter --image={{ .Values.Pod.prometheus_settings.image }} {{ .Values.Pod.prometheus_settings.cmd }}
-
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: get-pgid-{{ .Values.Pod.name }}
-  namespace: {{ .Values.Pod.namespace }}
-data:
-  define_env_pgid.sh: |
-    #!/bin/bash
     for dir in $(ls -t ~/{{ .Values.Pod.namespace }}/)
     do
       if [ -d ~/{{ .Values.Pod.namespace }}/$dir ]
       then
         # read the pgid file
         export PGID_FILE=~/{{ .Values.Pod.namespace }}/$dir/containers/wf/pgid
+        echo "PGID_FILE: $PGID_FILE"
         break
       fi
     done
+
+    sleep {{ .Values.Pod.prometheus_settings.wait_time_before_start }}
+    shifter --image={{ .Values.Pod.prometheus_settings.image }} {{ .Values.Pod.prometheus_settings.cmd }}

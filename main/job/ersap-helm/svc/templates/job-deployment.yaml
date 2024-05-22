@@ -29,22 +29,13 @@ spec:
               cpu: "256"
             requests:
               cpu: "256"
-
-        - name: get-pgid
-          image: get-pgid
-          command: ["source"]
-          args: [""]
-          volumeMounts:
-            - name: get-pgid
-              mountPath: get-pgid
-
         - name: prom
           image: prom
           command: ["bash"]
           args: [""]
           env:
             - name: PROCESS_EXPORTER_PORT
-              value: "{{ index .Values.Service 1 "targetPort" }}"
+              value: "{{ index .Values.Service 1 "originalPort" }}"
           ports:
             - containerPort: {{ index .Values.Service 1 "originalPort" }}
           volumeMounts:
@@ -58,9 +49,6 @@ spec:
         - name: prom
           configMap:
             name: prom-{{ .Values.Pod.name}}
-        - name: get-pgid
-          configMap:
-            name: get-pgid-{{ .Values.Pod.name}}
 
       nodeSelector:
         kubernetes.io/role: agent
