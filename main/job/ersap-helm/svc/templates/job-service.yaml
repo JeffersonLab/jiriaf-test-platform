@@ -14,7 +14,7 @@ spec:
     {
       name: {{ printf "%s-%s" $element.name $element.node | quote }},      
       protocol: {{ $element.protocol | quote }},
-      port: {{ $element.port }},
-      targetPort: {{ $element.port }}
+      port: {{ $element.port | quote }},
+      targetPort: {{ $element.port | quote }}
     }
     {{- end }}]
