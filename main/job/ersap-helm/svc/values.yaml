@@ -16,58 +16,58 @@ Service:
 - name:  ersap-exporter
   node: "0"
   protocol: TCP
-  port:  "20050"
-  originalPort: "2221"
+  port:  20050
+  originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
   node: "0"
   protocol: TCP
-  port:  "20051"
-  originalPort: "1776"
+  port:  20051
+  originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
   node: "0"
   protocol: TCP
-  port:  "20052"
-  originalPort: "8080"
+  port:  20052
+  originalPort: 8080
   path: /metrics
   interval: 15s
 - name: jrm-exporter
   node: "0"
   protocol: TCP
-  port:  "10043"
-  originalPort: "10043"
+  port:  10043
+  originalPort: 10043
   path: /metrics/resource
   interval: 15s
 
 - name:  ersap-exporter
   node: "1"
   protocol: TCP
-  port:  "20053"
-  originalPort: "2221"
+  port:  20053
+  originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
   node: "1"
   protocol: TCP
-  port:  "20054"
-  originalPort: "1776"
+  port:  20054
+  originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
   node: "1"
   protocol: TCP
-  port:  "20055"
-  originalPort: "8080"
+  port:  20055
+  originalPort: 8080
   path: /metrics
   interval: 15s
 - name: jrm-exporter
   node: "1"
   protocol: TCP
-  port:  "10044"
-  originalPort: "10044"
+  port:  10044
+  originalPort: 10044
   path: /metrics/resource
   interval: 15s
 
