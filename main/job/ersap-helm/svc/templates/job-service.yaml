@@ -12,7 +12,7 @@ spec:
   ports: [{{- range $index, $element := .Values.Service }}
     {{- if $index }},{{ end }}
     {
-      name: {{ $element.name | quote }}-{{ $element.node | quote }},
+      name: "{{ $element.name | quote }}-{{ $element.node | quote }}",
       protocol: {{ $element.protocol | quote }},
       port: {{ $element.port }},
       targetPort: {{ $element.port }}
