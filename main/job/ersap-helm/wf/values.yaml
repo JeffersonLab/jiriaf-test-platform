@@ -13,8 +13,8 @@ Pod:
 
 Service:
 - name: ersap-exporter
-  originalPort: "8080"
+  originalPort: "2221"
 - name: process-exporter
-  originalPort: "9256"
+  originalPort: "1776"
 - name: ejfat-exporter
   originalPort: "8080"

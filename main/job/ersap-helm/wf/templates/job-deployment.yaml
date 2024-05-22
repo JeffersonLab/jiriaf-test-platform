@@ -44,7 +44,7 @@ spec:
           args: [""]
           env:
             - name: PROCESS_EXPORTER_PORT
-              value: "{{ index .Values.Service 1 "targetPort" }}"
+              value: "{{ index .Values.Service 1 "originalPort" }}"
           ports:
             - containerPort: {{ index .Values.Service 1 "originalPort" }}
           volumeMounts:
