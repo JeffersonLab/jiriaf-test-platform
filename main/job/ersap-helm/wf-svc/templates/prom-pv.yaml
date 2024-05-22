@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
+  storageClassName: local-storage-{{ .Values.Deployment.name}}
   local:
     path: "{{ .Values.PersistentVolume.path}}/{{ .Values.Deployment.name}}"
   nodeAffinity:
