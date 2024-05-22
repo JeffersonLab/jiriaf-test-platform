@@ -1,0 +1,20 @@
+Pod:
+  name: ersap-test
+  namespace: default
+
+  ersap_settings:
+    image: docker:gurjyan/ersap:v0.1
+    cmd: /ersap/run-pipeline-node.sh
+
+  prometheus_settings:
+    image: jlabtsai/process-exporter:pgid-go
+    cmd: -V /proc:/host_proc --entrypoint
+    wait_time_before_start: 8
+
+Service:
+- name: ersap-exporter
+  targetPort: "2221"
+- name: process-exporter
+  targetPort: "1776"
+- name: ejfat-exporter
+  targetPort: "8080"
