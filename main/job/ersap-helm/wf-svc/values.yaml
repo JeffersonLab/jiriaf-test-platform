@@ -70,6 +70,35 @@ Service:
   path: /metrics/resource
   interval: 15s
 
+- name:  ersap-exporter
+  node: "2"
+  protocol: TCP
+  port:  20056
+  originalPort: 2221
+  path: /metrics
+  interval: 15s
+- name: process-exporter
+  node: "2"
+  protocol: TCP
+  port:  20057
+  originalPort: 1776
+  path: /metrics
+  interval: 15s
+- name: ejfat-exporter
+  node: "2"
+  protocol: TCP
+  port:  20058
+  originalPort: 8080
+  path: /metrics
+  interval: 15s
+- name: jrm-exporter
+  node: "2"
+  protocol: TCP
+  port:  10045
+  originalPort: 10045
+  path: /metrics/resource
+  interval: 15s
+
 PersistentVolume:
   node: jiriaf2302-control-plane
   path: /var/prom
