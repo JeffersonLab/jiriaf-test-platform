@@ -17,24 +17,28 @@ Service:
   protocol: TCP
   port: 20065
   targetPort: 20065
+  originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
   protocol: TCP
   port: 20066
   targetPort: 20066
+  originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
   protocol: TCP
   port: 20067
   targetPort: 20067
+  originalPort: 8080
   path: /metrics
   interval: 15s
 - name: jrm-exporter
   protocol: TCP
   port: 10048
   targetPort: 10048
+  originalPort: 10048
   path: /metrics/resource
   interval: 15s
 
