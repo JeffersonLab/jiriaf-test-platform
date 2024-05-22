@@ -37,6 +37,7 @@ data:
       then
         # read the pgid file
         export PGID_FILE=~/{{ .Values.Pod.namespace }}/$dir/containers/wf/pgid
+        echo "PGID_FILE: $PGID_FILE"
         break
       fi
     done
