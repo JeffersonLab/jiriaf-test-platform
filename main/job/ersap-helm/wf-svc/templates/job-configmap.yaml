@@ -23,7 +23,7 @@ data:
     export LB_HOST=129.57.177.135
     export PR_HOST=129.57.177.{{ index .Values.Service 0 "node" }}
     echo "LB_HOST: $LB_HOST, PR_HOST: $PR_HOST"
-    docker run -d --rm --name wf-$ns --cpus=$cpus --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh gurjyan/ersap:v0.1
+    docker run -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh gurjyan/ersap:v0.1
 
     ## find the last container id
     export CONTAINER_ID=$(docker ps -l -q)
@@ -32,5 +32,5 @@ data:
 
     ## find the pgid of the process in the container with "UseNUMA" in its command
     sleep 10
-    export PGID=$(docker top $CONTAINER_ID -eo pid,cmd | grep UseNUMA | awk '{print $1}' | xargs ps -o pgid= -p)
+    export PGID=$(docker top $CONTAINER_ID -eo pid,cmd | grep UseNUMA | awk '{print $LB_HOST}' | xargs ps -o pgid= -p)
     echo $PGID > $POD_ROOT_PATH/containers/wf/pgid
