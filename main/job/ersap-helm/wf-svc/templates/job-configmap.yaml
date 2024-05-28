@@ -30,7 +30,9 @@ data:
     ## store containerid for killing the container
     echo $CONTAINER_ID > $POD_ROOT_PATH/containers/wf/containerid
 
+
     ## find the pgid of the process in the container with "UseNUMA" in its command
     sleep 10
-    export PGID=$(docker top $CONTAINER_ID -eo pid,cmd | grep UseNUMA | awk '{print $LB_HOST}' | xargs ps -o pgid= -p)
+    export PGID=$(docker top $CONTAINER_ID -eo pid,cmd | grep UseNUMA | awk '{print $1}')
     echo $PGID > $POD_ROOT_PATH/containers/wf/pgid
+    echo "PGID: $PGID"
