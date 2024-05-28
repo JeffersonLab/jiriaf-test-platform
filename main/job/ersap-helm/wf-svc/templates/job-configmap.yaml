@@ -20,8 +20,17 @@ data:
     done
 
     # Run ERSAP
+    # get the node ip from hostname
+    export NODE_NAME=$(hostname | awk -F'-' '{print $2}')
+    ## if NODE_NAME is "fs", then set NODE_NUMBER to 7
+    if [ "$NODE_NAME" == "fs" ]; then
+      export NODE_NUMBER=7
+    else
+      export NODE_NUMBER=$(echo $NODE_NAME | awk -F'-' '{print $2}')
+    fi
+    export PR_HOST=129.57.177.$NODE_NUMBER
     export LB_HOST=129.57.177.135
-    export PR_HOST=129.57.177.{{ index .Values.Service 0 "node" }}
+
     echo "LB_HOST: $LB_HOST, PR_HOST: $PR_HOST"
     docker run -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh gurjyan/ersap:v0.1
 
