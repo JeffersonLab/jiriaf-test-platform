@@ -5,13 +5,6 @@
 
 # ssh -NfL $APISERVER_PORT:localhost:$APISERVER_PORT jiriaf2301
 
-
-# run this on jiriaf2301 to login04 at nersc
-export APISERVER_PORT="38687" #"35679"
-ssh -i ~/.ssh/nersc -J perlmutter -NfR $APISERVER_PORT:localhost:$APISERVER_PORT ejfat
-
-
-
 for i in $(seq 2 7)
 do
     i_padded=$(printf "%02d" $i)
