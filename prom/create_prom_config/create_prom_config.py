@@ -6,13 +6,13 @@ with open('/prom/prometheus-temp.yml', 'r') as file:
     data = yaml.safe_load(file)
 
 # num_proc_nodes
-num_proc_nodes = 40
+num_proc_nodes = 7
 
 # global labels
 global_labels = {
-    "task_name": "ersap-100g",
+    "task_name": "ersap-ejfat",
     "num_proc_nodes": str(num_proc_nodes),
-    "comupte_site": "nersc",
+    "comupte_site": "ejfat-nodes",
     "run_type": "production",
     "run_date": time.strftime("%Y-%m-%d"),
 }
