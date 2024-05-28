@@ -26,29 +26,13 @@ spec:
               mountPath: wf
           resources:
             limits:
-              cpu: "256"
+              cpu: "128"
             requests:
-              cpu: "256"
-        - name: prom
-          image: prom
-          command: ["bash"]
-          args: [""]
-          env:
-            - name: PROCESS_EXPORTER_PORT
-              value: "{{ index .Values.Service 1 "originalPort" }}"
-          ports:
-            - containerPort: {{ index .Values.Service 1 "originalPort" }}
-          volumeMounts:
-            - name: prom
-              mountPath: prom
-
+              cpu: "128"
       volumes:
         - name: wf
           configMap:
             name: wf-{{ .Values.Deployment.name}}
-        - name: prom
-          configMap:
-            name: prom-{{ .Values.Deployment.name}}
 
       nodeSelector:
         kubernetes.io/role: agent
