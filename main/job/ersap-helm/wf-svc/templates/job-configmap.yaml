@@ -36,3 +36,8 @@ data:
     export PGID=$(docker top $CONTAINER_ID -eo pid,cmd | grep UseNUMA | awk '{print $1}')
     echo $PGID > $POD_ROOT_PATH/containers/wf/pgid
     echo "PGID: $PGID"
+
+    ## keep process alive
+    sleep $1
+    ## kill the container
+    docker kill $CONTAINER_ID
