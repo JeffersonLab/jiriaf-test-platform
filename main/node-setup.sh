@@ -2,14 +2,14 @@
 
 export CONTROL_PLANE_IP="jiriaf2302" #"jiriaf2301"
 export APISERVER_PORT="38687" #35679
-export NODENAME="vk-nersc$1"
-export KUBECONFIG="/global/homes/j/jlabtsai/run-vk/kubeconfig/$CONTROL_PLANE_IP"
+export NODENAME="ejfat-$1"
+export KUBECONFIG="~/.kube/config"
 export VKUBELET_POD_IP="172.17.0.1"
 export KUBELET_PORT="100""$1"
 
 export JIRIAF_WALLTIME="0" # "0" if no limit
 export JIRIAF_NODETYPE="cpu"
-export JIRIAF_SITE="nersc"
+export JIRIAF_SITE="ejfat"
 
 echo "JRM: $NODENAME is running... on $HOSTNAME"
 
@@ -35,7 +35,8 @@ echo "walltime: $JIRIAF_WALLTIME; nodetype: $JIRIAF_NODETYPE; site: $JIRIAF_SITE
 # ssh -NfR *:$KUBELET_PORT:localhost:$KUBELET_PORT $CONTROL_PLANE_IP 
 # To make sure the port is open to all interfaces, one has to set GatewayPorts to yes in /etc/ssh/sshd_config and run sudo service ssh restart at mylin.
 
-shifter --image=docker:jlabtsai/vk-cmd:main -- /bin/bash -c "cp -r /vk-cmd `pwd`/$NODENAME"
+container_id=$(docker run -itd --rm --name vk-cmd $VK_CMD_IMAGE)
+docker cp ${container_id}:/vk-cmd `pwd` && docker stop ${container_id}
 
 cd `pwd`/$NODENAME
 
