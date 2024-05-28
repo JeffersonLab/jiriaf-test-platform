@@ -1,9 +1,7 @@
 #!/bin/bash
 # run this on login04
 
-# export APISERVER_PORT="35679"
-
-# ssh -NfL $APISERVER_PORT:localhost:$APISERVER_PORT jiriaf2301
+export APISERVER_PORT="38687" #35679
 
 for i in $(seq 2 7)
 do
