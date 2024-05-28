@@ -22,7 +22,7 @@ do
 
     scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/node-setup.sh ejfat-$i:~/
     # run node-setup.sh on each node
-    ssh ejfat-$i "chmod +x node-setup.sh && ./node-setup.sh $i" &
+    ssh ejfat-$i "chmod +x node-setup.sh && ./node-setup.sh $i_padded" &
     sleep 3
 done
 
