@@ -12,7 +12,7 @@ do
     fi
     ssh -NfR $APISERVER_PORT:localhost:$APISERVER_PORT ejfat-$i  
     echo "100""$i_padded"
-    ssh -NfL 100$i_padded:localhost:100$i_padded ejfat-$i
+    ssh -NfL *:100$i_padded:localhost:100$i_padded ejfat-$i
     echo "200""$i_padded"
     ssh -NfL 200$i_padded:localhost:200$i_padded ejfat-$i
     echo "300""$i_padded"
