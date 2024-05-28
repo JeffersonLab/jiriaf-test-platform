@@ -14,11 +14,11 @@ do
     echo "100""$i_padded"
     ssh -NfL *:100$i_padded:localhost:100$i_padded ejfat-$i
     echo "200""$i_padded"
-    ssh -NfL 200$i_padded:localhost:2221 ejfat-$i
+    ssh -NfL *:200$i_padded:localhost:2221 ejfat-$i
     echo "300""$i_padded"
-    ssh -NfL 300$i_padded:localhost:1776 ejfat-$i
+    ssh -NfL *:300$i_padded:localhost:1776 ejfat-$i
     echo "400""$i_padded"
-    ssh -NfL 400$i_padded:localhost:8088 ejfat-$i
+    ssh -NfL *:400$i_padded:localhost:8088 ejfat-$i
 
     scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/node-setup.sh ejfat-$i:~/
     # run node-setup.sh on each node
