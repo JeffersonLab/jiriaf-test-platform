@@ -39,3 +39,29 @@ spec:
         resources:
           requests:
             storage: {{ .Values.PersistentVolume.size}}
+
+---
+# add service for prometheus
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.Deployment.name}}
+  namespace: {{ .Values.Prometheus.namespace}}
+  labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 2.32.1
+spec:
+  ports:
+    - name: web
+      port: 9090
+      targetPort: 9090
+  selector:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 2.32.1
+  type: ClusterIP
