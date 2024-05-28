@@ -19,6 +19,11 @@ do
     ssh -NfL 300$i_padded:localhost:300$i_padded ejfat-$i
     echo "400""$i_padded"
     ssh -NfL 400$i_padded:localhost:400$i_padded ejfat-$i
+
+    scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/node-setup.sh ejfat-$i:~/
+    # run node-setup.sh on each node
+    ssh ejfat-$i "chmod +x node-setup.sh && ./node-setup.sh $i_padded" &
+    sleep 3
 done
 
 
