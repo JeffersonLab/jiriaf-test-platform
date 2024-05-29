@@ -1,7 +1,7 @@
 Deployment:
   name: ersap-test
   namespace: default
-  replicas: 1
+  replicas: 7
 
   ersap_settings:
     image: docker:gurjyan/ersap:v0.1
