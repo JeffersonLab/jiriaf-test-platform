@@ -26,7 +26,7 @@ data:
     if [ "$NODE_NAME" == "fs" ]; then
       export NODE_NUMBER=7
     else
-      export NODE_NUMBER=$(echo $NODE_NAME | awk -F'-' '{print $2}')
+      export NODE_NUMBER=$NODE_NAME
     fi
     export PR_HOST=129.57.177.$NODE_NUMBER
     export LB_HOST=129.57.177.135
