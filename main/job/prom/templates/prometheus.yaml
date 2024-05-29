@@ -12,8 +12,8 @@ metadata:
 spec:
   image: quay.io/prometheus/prometheus:v2.32.1
   nodeSelector:
-    kubernetes.io/os: linux
-    kubernetes.io/hostname: jiriaf2302-control-plane
+    "kubernetes.io/os": "linux"
+    "kubernetes.io/hostname": "jiriaf2302-control-plane"
 replicas: 1
   resources:
     requests:
