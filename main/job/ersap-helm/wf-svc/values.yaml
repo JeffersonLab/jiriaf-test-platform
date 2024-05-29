@@ -183,7 +183,7 @@ Service:
 PersistentVolume:
   node: jiriaf2302-control-plane
   path: /var/prom
-  size: 10Gi
+  size: 5Gi
 Prometheus:
   serviceaccount: prometheus-k8s
   namespace: monitoring
