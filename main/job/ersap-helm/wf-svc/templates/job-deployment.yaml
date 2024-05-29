@@ -17,7 +17,7 @@ spec:
         - name: wf
           image: wf
           command: ["bash"]
-          args: ["300"]
+          args: ["10800"]
           ports:
             - containerPort: {{ index .Values.Service 0 "originalPort" }}
             - containerPort: {{ index .Values.Service 2 "originalPort" }}
