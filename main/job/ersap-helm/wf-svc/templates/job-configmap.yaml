@@ -33,7 +33,6 @@ data:
     echo "LB_HOST: $LB_HOST, PR_HOST: $PR_HOST"
 
     ## pull the docker image
-    docker rmi gurjyan/ersap:v0.1
     docker pull gurjyan/ersap:v0.1
     docker run -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh gurjyan/ersap:v0.1
 
