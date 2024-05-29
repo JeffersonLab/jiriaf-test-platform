@@ -59,6 +59,5 @@ spec:
       port: 9090
       targetPort: 9090
   selector:
-    matchLabels:
-      app: {{ .Values.Deployment.name}}
+    app: {{ .Values.Deployment.name}}
   type: ClusterIP
