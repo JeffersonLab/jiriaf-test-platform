@@ -32,8 +32,8 @@ Service:
 - name: jrm-exporter
   node: "0"
   protocol: TCP
-  port:  10002
-  originalPort: 10002
+  port:  1990
+  originalPort: 1990
   path: /metrics/resource
   interval: 15s
 
