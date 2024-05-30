@@ -22,7 +22,7 @@ do
 
     scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/node-setup.sh ejfat-$i:~/
     # run node-setup.sh on each node
-    ssh ejfat-$i "chmod +x node-setup.sh && ./node-setup.sh $i" &
+    ssh ejfat-$i "chmod +x node-setup.sh && ./node-setup.sh $i $(ping -c 1 ejfat-$i | awk -F'[()]' '/PING/{print $2}')" &
     sleep 3
 done
 
