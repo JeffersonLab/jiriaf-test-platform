@@ -9,28 +9,24 @@ Deployment:
 
 Service:
 - name:  ersap-exporter
-  node: "0"
   protocol: TCP
   port:  2221
   originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
-  node: "0"
   protocol: TCP
   port: 1776
   originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
-  node: "0"
   protocol: TCP
   port: 8088
   originalPort: 8088
   path: /metrics
   interval: 15s
 - name: jrm-exporter
-  node: "0"
   protocol: TCP
   port:  1990
   originalPort: 1990
