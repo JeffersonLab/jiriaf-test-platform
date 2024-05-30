@@ -4,7 +4,7 @@ export NODENAME=ejfat-"$1"
 export KUBECONFIG="$HOME/.kube/config"
 export VKUBELET_POD_IP=ejfat-"$1"
 # set kubelet port as 10000 + $1
-export KUBELET_PORT=$((10000 + $1))
+export KUBELET_PORT=1990  #$((10000 + $1))
 
 export JIRIAF_WALLTIME="0" # "0" if no limit
 export JIRIAF_NODETYPE="cpu"

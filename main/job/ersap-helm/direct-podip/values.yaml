@@ -1,0 +1,49 @@
+Deployment:
+  name: ersap-test
+  namespace: default
+  replicas: 6
+
+  ersap_settings:
+    image: docker:gurjyan/ersap:v0.1
+    cmd: /ersap/run-pipeline-node.sh
+
+Service:
+- name:  ersap-exporter
+  node: "0"
+  protocol: TCP
+  port:  2221
+  originalPort: 2221
+  path: /metrics
+  interval: 15s
+- name: process-exporter
+  node: "0"
+  protocol: TCP
+  port: 1776
+  originalPort: 1776
+  path: /metrics
+  interval: 15s
+- name: ejfat-exporter
+  node: "0"
+  protocol: TCP
+  port: 8088
+  originalPort: 8088
+  path: /metrics
+  interval: 15s
+- name: jrm-exporter
+  node: "0"
+  protocol: TCP
+  port:  10002
+  originalPort: 10002
+  path: /metrics/resource
+  interval: 15s
+
+
+PersistentVolume:
+  node: jiriaf2302-control-plane
+  path: /var/prom
+  size: 5Gi
+Prometheus:
+  serviceaccount: prometheus-k8s
+  namespace: monitoring
+
+#https://github.com/prometheus-operator/kube-prometheus/blob/main/docs/customizations/monitoring-additional-namespaces.md
