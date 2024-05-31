@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.Deployment.name}}
   namespace: {{ .Values.Deployment.namespace}}
 spec:
-  parallelism: 6
+  parallelism: {{ .Values.Deployment.replicas}}
   template:
     metadata:
       labels:
