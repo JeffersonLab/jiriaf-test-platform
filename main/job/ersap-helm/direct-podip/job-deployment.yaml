@@ -33,41 +33,10 @@ spec:
         - name: wf
           configMap:
             name: wf-{{ .Values.Deployment.name}}
-      apiVersion: batch/v1
-      kind: Job
-      metadata:
-        name: {{ .Values.Deployment.name}}
-        namespace: {{ .Values.Deployment.namespace}}
-      spec:
-        template:
-          metadata:
-            labels:
-              app: {{ .Values.Deployment.name}}
-          spec:
-            containers:
-              - name: wf
-                image: wf
-                command: ["bash"]
-                args: ["10800"]
-                ports:
-                  - containerPort: {{ index .Values.Service 0 "originalPort" }}
-                  - containerPort: {{ index .Values.Service 2 "originalPort" }}
-                volumeMounts:
-                  - name: wf
-                    mountPath: wf
-                resources:
-                  limits:
-                    cpu: "128"
-                  requests:
-                    cpu: "128"
-            volumes:
-              - name: wf
-                configMap:
-                  name: wf-{{ .Values.Deployment.name}}
-            restartPolicy: OnFailure
-            nodeSelector:
-              kubernetes.io/role: agent
-            tolerations:
-              - key: "virtual-kubelet.io/provider"
-                value: "mock"
-                effect: "NoSchedule"
+
+      nodeSelector:
+        kubernetes.io/role: agent
+      tolerations:
+        - key: "virtual-kubelet.io/provider"
+          value: "mock"
+          effect: "NoSchedule"
