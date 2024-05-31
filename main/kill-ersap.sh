@@ -11,7 +11,7 @@ do
         i="fs"
     fi
     # kill remote Docker container with the name "gurjyan/ersap:v0.1"
-    ssh ejfat-$i "docker kill $(docker ps -q --filter ancestor=gurjyan/ersap:v0.1)" &
+    ssh ejfat-$i "docker kill \$(docker ps -q --filter ancestor=gurjyan/ersap:v0.1)" &
     sleep 3
 done
 
