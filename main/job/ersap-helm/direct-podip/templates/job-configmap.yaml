@@ -56,18 +56,3 @@ data:
 
     # Kill the container
     docker kill $CONTAINER_ID
-
-
----
-
-# initContainers:
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: init-container-{{ .Values.Deployment.name }}
-  namespace: {{ .Values.Deployment.namespace }}
-data:
-  sleep.sh: |
-    #!/bin/bash
-
-    sleep {{ .Values.Deployment.initDelay }}
