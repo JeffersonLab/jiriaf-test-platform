@@ -33,7 +33,7 @@ data:
 
     # Pull and run the docker image
     docker pull {{ .Values.Deployment.ersap_settings.image }}
-    docker run -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh {{}}
+    docker run -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh {{ .Values.Deployment.ersap_settings.image }}
 
     # Get the ID of the last run container
     export CONTAINER_ID=$(docker ps -l -q)
