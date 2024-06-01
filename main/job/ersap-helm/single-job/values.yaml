@@ -1,11 +1,11 @@
 Deployment:
-  name: ersap-test3
+  name: this-name-is-changing
   namespace: default
   replicas: 1
-  app: ersap-test3
+  app: ersap-test4
 
   ersap_settings:
-    image: gurjyan/ersap:v0.1
+    image: gurjyan/ersap:v0.2
     cmd: /ersap/run-pipeline-node.sh
 
 Service:
