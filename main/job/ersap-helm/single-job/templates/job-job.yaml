@@ -8,15 +8,8 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.Deployment.name}}
+        app: {{ .Values.Deployment.app}}
     spec:
-      initContainers:
-      - name: init
-        image: init
-        command: ["bash"]
-        volumeMounts:
-        - name: init
-          mountPath: init
       containers:
       - name: wf
         image: wf
@@ -36,10 +29,7 @@ spec:
       volumes:
       - name: wf
         configMap:
-          name: wf-{{ .Values.Deployment.name}}
-      - name: init
-        configMap:
-          name: init-container-{{ .Values.Deployment.name}}
+          name: wf-{{ .Values.Deployment.app}}
       restartPolicy: OnFailure
       nodeSelector:
         kubernetes.io/role: agent
