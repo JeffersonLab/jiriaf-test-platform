@@ -2,7 +2,6 @@ Deployment:
   name: ersap-test2
   namespace: default
   replicas: 6
-  initDelay: 60
 
   ersap_settings:
     image: gurjyan/ersap:v0.2
