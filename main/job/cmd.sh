@@ -9,8 +9,11 @@ kubectl -n 100g get pods
 kubectl -n 100g delete pods
 
 while true; do kubectl get node; echo ----; kubectl get pods -n 100g; echo ===; sleep 3; done
-watch -n 3 "kubectl get node; echo ----; kubectl get pods; echo ---; kubectl top node; echo ----; kubectl top pod; echo ========"
 
+watch -n 0.5 "kubectl get node"
+watch -n 0.5 "kubectl get pods"
+watch -n 0.5 "kubectl top node"
+watch -n 0.5 "kubectl top pod"
 
 # for helm
 helm install ersap1 `pwd` --set name=1
