@@ -32,7 +32,7 @@ data:
     echo "LB_HOST: $LB_HOST, PR_HOST: $PR_HOST"
 
     # Pull and run the docker image
-    docker pull gurjyan/ersap:v0.1
+    docker pull gurjyan/ersap:v0.2
     docker run -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh gurjyan/ersap:v0.1
 
     # Get the ID of the last run container
