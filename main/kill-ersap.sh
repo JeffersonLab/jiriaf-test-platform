@@ -6,7 +6,7 @@ do
         i="fs"
     fi
     # kill Docker container with image name "gurjyan/ersap:v0.1"
-    ssh ejfat-$i "container_id=\$(docker ps -q --filter ancestor=gurjyan/ersap:v0.1); if [ ! -z \"\$container_id\" ]; then docker kill \$container_id; fi" &
+    ssh ejfat-$i "container_id=\$(docker ps -q --filter ancestor=gurjyan/ersap:v0.2); if [ ! -z \"\$container_id\" ]; then docker kill \$container_id; fi" &
     sleep 3
 done
 

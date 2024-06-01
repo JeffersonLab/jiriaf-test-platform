@@ -29,7 +29,7 @@ spec:
       volumes:
       - name: wf
         configMap:
-          name: wf-{{ .Values.Deployment.app}}
+          name: wf-{{ .Values.Deployment.name }}
       restartPolicy: OnFailure
       nodeSelector:
         kubernetes.io/role: agent

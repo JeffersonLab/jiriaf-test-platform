@@ -1,5 +1,5 @@
 Deployment:
-  name: ersap-test
+  name: ersap-test3
   namespace: default
   replicas: 1
 
