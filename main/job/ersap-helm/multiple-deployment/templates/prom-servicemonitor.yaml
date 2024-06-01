@@ -4,7 +4,7 @@ metadata:
   name: {{.Values.Deployment.name}}
   namespace: {{.Values.Deployment.namespace}}
   labels:
-    app: {{.Values.Deployment.app}}
+    app: {{.Values.Deployment.serviceMonitorLabel}}
 spec:
   selector:
     matchLabels:

@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.Deployment.name}}
   namespace: {{ .Values.Deployment.namespace}}
   labels:
-    app: {{ .Values.Deployment.name}}
+    app: {{ .Values.Deployment.name}} # this has to change to unchanged servieMonitorLabel if using single prometheus instance for serveral deployments.
 spec:
   type: ClusterIP
   selector:
