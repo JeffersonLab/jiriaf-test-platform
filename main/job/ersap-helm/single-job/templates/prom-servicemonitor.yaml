@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: {{.Values.Deployment.app}}
+      app: {{.Values.Deployment.name}}
   endpoints: [
     {{- range $index, $element := .Values.Service }}
         {{- if $index }},{{ end }}

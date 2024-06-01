@@ -8,13 +8,13 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.Deployment.app}}
+        app: {{ .Values.Deployment.name}}
     spec:
       containers:
       - name: wf
         image: wf
         command: ["bash"]
-        args: ["10800"]
+        args: ["21600"]
         ports:
         - containerPort: {{ index .Values.Service 0 "originalPort" }}
         - containerPort: {{ index .Values.Service 2 "originalPort" }}

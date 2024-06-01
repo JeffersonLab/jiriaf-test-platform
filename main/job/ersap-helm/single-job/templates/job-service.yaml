@@ -4,11 +4,11 @@ metadata:
   name: {{ .Values.Deployment.name}}
   namespace: {{ .Values.Deployment.namespace}}
   labels:
-    app: {{ .Values.Deployment.app}}
+    app: {{ .Values.Deployment.name}}
 spec:
   type: ClusterIP
   selector:
-    app: {{ .Values.Deployment.app}}
+    app: {{ .Values.Deployment.name}}
   ports: [{{- range $index, $element := .Values.Service }}
     {{- if $index }},{{ end }}
     {

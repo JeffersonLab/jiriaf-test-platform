@@ -2,11 +2,10 @@ Deployment:
   name: ersap-test3
   namespace: default
   replicas: 1
-  initDelay: 60
   app: ersap-test3
 
   ersap_settings:
-    image: gurjyan/ersap:v0.2
+    image: gurjyan/ersap:v0.1
     cmd: /ersap/run-pipeline-node.sh
 
 Service:
