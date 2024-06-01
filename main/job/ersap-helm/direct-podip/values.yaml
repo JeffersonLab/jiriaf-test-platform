@@ -1,10 +1,10 @@
 Deployment:
-  name: ersap-test2
+  name: ersap-test-v0.2
   namespace: default
-  replicas: 2
+  replicas: 6
 
   ersap_settings:
-    image: docker:gurjyan/ersap:v0.1
+    image: gurjyan/ersap:v0.2
     cmd: /ersap/run-pipeline-node.sh
 
 Service:
