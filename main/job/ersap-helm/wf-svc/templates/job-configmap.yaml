@@ -30,5 +30,10 @@ data:
       fi
     done
 
+
+    export GROUP_FOR_CONFIG={{ "{{.ExeBase}}:{{.Username}}:{{.PID}}" | quote }}
+    # export PGID_FILE=/global/homes/j/jlabtsai/pgid
+    export CMDS_FOR_CONFIG="virtual-kubelet"
+
     sleep {{ .Values.Deployment.prometheus_settings.wait_time_before_start }}
     shifter --image={{ .Values.Deployment.prometheus_settings.image }} {{ .Values.Deployment.prometheus_settings.cmd }}

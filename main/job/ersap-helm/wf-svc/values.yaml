@@ -1,5 +1,5 @@
 Deployment:
-  name: ersap-test-1
+  name: ersap-test-cpu
   namespace: default
   replicas: 1
 
@@ -16,28 +16,28 @@ Service:
 - name:  ersap-exporter
   node: "0"
   protocol: TCP
-  port:  20050
+  port: 20001
   originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
   node: "0"
   protocol: TCP
-  port:  20051
+  port:  30001
   originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
   node: "0"
   protocol: TCP
-  port:  20052
+  port:  40001
   originalPort: 8080
   path: /metrics
   interval: 15s
 - name: jrm-exporter
   node: "0"
   protocol: TCP
-  port:  10043
+  port:  10001
   originalPort: 10043
   path: /metrics/resource
   interval: 15s
