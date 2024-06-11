@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# run this on one of ejfat nodes.
+
 image=gurjyan/ersap:v0.1
 
 #input_volume=$((1024*))
