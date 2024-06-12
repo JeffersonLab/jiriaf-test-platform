@@ -4,6 +4,14 @@ Steps to run tests by Helm chart.
 2. Run [helm install $ID-prom prom/ --set Deployment.name=$ID](main/job/prom). This will create prometheus instance in the cluster for the test.
 3. Run [helm install $ID-job job/ --set Deployment.name=$ID-job --set Deployment.serviceMonitorLabel=$ID](main/job). This will create a job in the cluster for the test. ⚠️ Notice that `Deployment.serviceMonitorLabel` can be set to a identical value for multiple deployments if they are supposed to be monitored by the same prometheus instance.
 
+```bash
+#!/bin/bash
+
+ID=$1
+helm install $ID-prom prom/ --set Deployment.name=$ID
+helm install $ID-job job/ --set Deployment.name=$ID-job --set Deployment.serviceMonitorLabel=$ID
+```
+
 
 # Test Record
 
@@ -13,3 +21,35 @@ Steps to run tests by Helm chart.
 | 1  | ersap-test2 | v0.2         | 6         | 2024-06-01 00:57:00 to 2024-06-01 02:01:37UTC | ejfat        | Y                              | check if all pipes will survive after 15 mins. | no |
 | 2  | ersap-test3 | v0.1         | 3         | 2024-06-01 03:40:16 to 2024-06-01 04:55:09UTC | ejfat        | N                              | intermittent start of pipes, checking if pipes will survive. | one pipe survives at a time |
 | 3  | ersap-test4 | v0.2         | 6         | 2024-06-01 04:47:50 to 2024-06-01 14:56:34UTC | ejfat        | N                              | using v0.2 for the test ID-2. | same result as ID-2. |
+
+
+
+# JIRIAF DT Test Configs
+
+| Group | dt1 (GB) | dt2 (ms) | Control (nodes) |
+| --- | --- | --- | --- |
+| 1    | 1      | 2     | 1          |
+| 1    | 1      | 2     | 1          |
+| 1    | 1      | 2     | 1          |
+| 1    | 1      | 2     | 1          |
+| 1    | 1      | 2     | 1          |
+| 2    | 2      | 2     | 1          |
+| 2    | 2      | 2     | 1          |
+| 2    | 2      | 2     | 1          |
+| 2    | 2      | 2     | 1          |
+| 2    | 2      | 2     | 1          |
+| 3    | 5      | 2     | 1          |
+| 3    | 5      | 2     | 1          |
+| 3    | 5      | 2     | 1          |
+| 3    | 5      | 2     | 1          |
+| 3    | 5      | 2     | 1          |
+| 4    | 3    | 2     | 2          |
+| 4    | 3    | 2     | 2          |
+| 4    | 3    | 2     | 2          |
+| 4    | 3    | 2     | 2          |
+| 4    | 3    | 2     | 2          |
+| 5    | 10     | 2     | 2          |
+| 5    | 10     | 2     | 2          |
+| 5    | 10     | 2     | 2          |
+| 5    | 10     | 2     | 2          |
+| 5    | 10     | 2     | 2          |
