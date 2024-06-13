@@ -2,7 +2,7 @@ name: "01"
 namespace: 100g
 
 
-ersap_settings:
+ersapSettings:
   image: docker:gurjyan/ersap:v0.1
   cmd: /ersap/run-pipeline-node.sh
 

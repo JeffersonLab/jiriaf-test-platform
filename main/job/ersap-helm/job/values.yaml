@@ -4,7 +4,9 @@ Deployment:
   replicas: 1
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
 
-  ersap_settings:
+  cpuUsage: "2"
+  
+  ersapSettings:
     image: gurjyan/ersap:v0.1
     cmd: /ersap/run-pipeline-node.sh
 

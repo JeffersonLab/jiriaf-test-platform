@@ -32,8 +32,9 @@ data:
     echo "LB_HOST: $LB_HOST, PR_HOST: $PR_HOST"
 
     # Pull and run the docker image
-    docker pull {{ .Values.Deployment.ersap_settings.image }}
-    docker run --name vd-ersap -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh {{ .Values.Deployment.ersap_settings.image }}
+    docker pull {{ .Values.Deployment.ersapSettings.image }}
+    docker run --cpus={{.Values.Deployment.cpuUsage}} --name vd-ersap -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint /ersap/run-pipeline-node.sh {{ .Values.Deployment.ersapSettings.image }}
+    #####--cpus={{.Values.Deployment.cpuUsage}}
 
     # Get the ID of the last run container
     export CONTAINER_ID=$(docker ps -l -q)

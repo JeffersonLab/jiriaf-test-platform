@@ -3,7 +3,7 @@ Deployment:
   namespace: default
   replicas: 6
 
-  ersap_settings:
+  ersapSettings:
     image: docker:gurjyan/ersap:v0.1
     cmd: /ersap/run-pipeline-node.sh
 
