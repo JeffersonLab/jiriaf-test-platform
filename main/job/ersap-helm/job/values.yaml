@@ -4,11 +4,12 @@ Deployment:
   replicas: 1
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
 
-  cpuUsage: "2"
+  cpuUsage: "1"
   
   ersapSettings:
-    image: gurjyan/ersap:v0.1
+    image: jlabtsai/ersap:thread #gurjyan/ersap:v0.1
     cmd: /ersap/run-pipeline-node.sh
+    file: /x.ersap
 
 Service:
 - name:  ersap-exporter
@@ -35,6 +36,13 @@ Service:
   originalPort: 1990
   path: /metrics/resource
   interval: 15s
+- name: ersap-queue
+  protocol: TCP
+  port:  2222
+  originalPort: 2222
+  path: /metrics/resource
+  interval: 15s
+
 
 
 PersistentVolume:
