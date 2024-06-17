@@ -20,3 +20,6 @@ for i in $(seq 1 25); do helm install ersap$i `pwd` --set name=$i;
 
 # remove 25 ersap instances
 for i in $(seq 1 25); do helm uninstall ersap$i; done
+
+# rm containers
+docker stop vk-exporter; docker rm vk-exporter; docker stop vd-ersap; docker rm vd-ersap
