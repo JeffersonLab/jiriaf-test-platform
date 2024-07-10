@@ -63,4 +63,4 @@ spec:
               - key: "kubernetes.io/hostname"
                 operator: In
                 values:
-                - "ejfat-6"
+                - "ejfat-{{ .Values.Deployment.ejfatNode}}"
