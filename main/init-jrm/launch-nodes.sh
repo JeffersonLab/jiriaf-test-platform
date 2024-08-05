@@ -20,7 +20,7 @@ do
     # echo "400""$i_padded"
     # ssh -NfL *:400$i_padded:localhost:8088 ejfat-$i
 
-    scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/node-setup.sh ejfat-$i:~/
+    scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/init-jrm/node-setup.sh ejfat-$i:~/
     # run node-setup.sh on each node
     ssh ejfat-$i "chmod +x node-setup.sh && ./node-setup.sh $i $(ping -c 1 ejfat-$i | awk -F'[()]' '/PING/{print $2}')" &
     sleep 3
