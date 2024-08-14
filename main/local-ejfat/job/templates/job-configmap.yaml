@@ -8,7 +8,8 @@ data:
     #!/bin/bash
     # export LB_HOST=$1
     # export PR_HOST=$2
-    apptainer run {{ .Values.Deployment.ersapSettings.image }} -- {{ .Values.Deployment.ersapSettings.cmd }}
+    # apptainer run {{ .Values.Deployment.ersapSettings.image }} -- {{ .Values.Deployment.ersapSettings.cmd }}
+    shifter --image={{ .Values.Deployment.ersapSettings.image  }} -- {{ .Values.Deployment.ersapSettings.cmd }}
 
 
 
@@ -39,4 +40,5 @@ data:
     # export CMDS_FOR_CONFIG="virtual-kubelet"
 
     sleep 15
-    apptainer run --bind /proc:/host_proc {{ .Values.Deployment.processExporterSettings.image }}
+    # apptainer run --bind /proc:/host_proc {{ .Values.Deployment.processExporterSettings.image }}
+    shifter --image={{ .Values.Deployment.processExporterSettings.image }} -V /proc:/host_proc --entrypoint
