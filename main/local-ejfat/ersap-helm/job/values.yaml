@@ -4,47 +4,157 @@ Deployment:
   replicas: 1
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
 
-  cpuUsage: "16"
-  ejfatNode: "5"
-
   ersapSettings:
-    image: jlabtsai/ersap:thread #gurjyan/ersap:v0.1
+    image: ~/ersap_v0.1.sif
     cmd: /ersap/run-pipeline-node.sh
-    file: /x.ersap
+  
+  processExporterSettings:
+    image: ~/process-exporter_pgid-go.sif
 
 Service:
 - name:  ersap-exporter
+  node: ornl-0
   protocol: TCP
-  port:  2221
+  port:  20000
   originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
+  node: ornl-0
   protocol: TCP
-  port: 1776
+  port: 20001
   originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
+  node: ornl-0
   protocol: TCP
-  port: 8088
+  port: 20002
   originalPort: 8088
   path: /metrics
   interval: 15s
 - name: jrm-exporter
+  node: ornl-0
   protocol: TCP
-  port:  1990
-  originalPort: 1990
+  port:  10000
+  originalPort: 10000
   path: /metrics/resource
   interval: 15s
 - name: ersap-queue
+  node: ornl-0
   protocol: TCP
-  port:  2222
+  port:  20003
   originalPort: 2222
   path: /metrics/resource
   interval: 15s
 
+- name:  ersap-exporter
+  node: ornl-1
+  protocol: TCP
+  port:  20004
+  originalPort: 2221
+  path: /metrics
+  interval: 15s
+- name: process-exporter
+  node: ornl-1
+  protocol: TCP
+  port: 20005
+  originalPort: 1776
+  path: /metrics
+  interval: 15s
+- name: ejfat-exporter
+  node: ornl-1
+  protocol: TCP
+  port: 20006
+  originalPort: 8088
+  path: /metrics
+  interval: 15s
+- name: jrm-exporter
+  node: ornl-1
+  protocol: TCP
+  port:  10001
+  originalPort: 10001
+  path: /metrics/resource
+  interval: 15s
+- name: ersap-queue
+  node: ornl-1
+  protocol: TCP
+  port:  20007
+  originalPort: 2222
+  path: /metrics/resource
+  interval: 15s
 
+- name:  ersap-exporter
+  node: ornl-2
+  protocol: TCP
+  port:  20008
+  originalPort: 2221
+  path: /metrics
+  interval: 15s
+- name: process-exporter
+  node: ornl-2
+  protocol: TCP
+  port: 20009
+  originalPort: 1776
+  path: /metrics
+  interval: 15s
+- name: ejfat-exporter
+  node: ornl-2
+  protocol: TCP
+  port: 20010
+  originalPort: 8088
+  path: /metrics
+  interval: 15s
+- name: jrm-exporter
+  node: ornl-2
+  protocol: TCP
+  port:  10002
+  originalPort: 10001
+  path: /metrics/resource
+  interval: 15s
+- name: ersap-queue
+  node: ornl-2
+  protocol: TCP
+  port:  20011
+  originalPort: 2222
+  path: /metrics/resource
+  interval: 15s
+
+- name:  ersap-exporter
+  node: ornl-3
+  protocol: TCP
+  port:  20012
+  originalPort: 2221
+  path: /metrics
+  interval: 15s
+- name: process-exporter
+  node: ornl-3
+  protocol: TCP
+  port: 20013
+  originalPort: 1776
+  path: /metrics
+  interval: 15s
+- name: ejfat-exporter
+  node: ornl-3
+  protocol: TCP
+  port: 20014
+  originalPort: 8088
+  path: /metrics
+  interval: 15s
+- name: jrm-exporter
+  node: ornl-3
+  protocol: TCP
+  port:  10003
+  originalPort: 10001
+  path: /metrics/resource
+  interval: 15s
+- name: ersap-queue
+  node: ornl-3
+  protocol: TCP
+  port:  20015
+  originalPort: 2222
+  path: /metrics/resource
+  interval: 15s
 
 PersistentVolume:
   node: jiriaf2302-control-plane

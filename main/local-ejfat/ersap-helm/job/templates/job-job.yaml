@@ -23,9 +23,9 @@ spec:
           mountPath: wf
         resources:
           limits:
-            cpu: "128"
+            cpu: "256"
           requests:
-            cpu: "128"
+            cpu: "256"
       - name: prom
         image: prom
         command: ["bash"]
@@ -60,7 +60,11 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: "kubernetes.io/hostname"
+              - key: jiriaf.nodetype
                 operator: In
                 values:
-                - "ejfat-{{ .Values.Deployment.ejfatNode}}"
+                - "ejfat"
+              - key: jiriaf.site
+                operator: In
+                values:
+                - "ornl"

@@ -13,7 +13,7 @@ spec:
     {{- range $index, $element := .Values.Service }}
         {{- if $index }},{{ end }}
         {
-          port: {{ printf "%s" $element.name | quote }},
+          port: {{ printf "%s-%s" $element.name $element.node | quote }},
           interval: {{ $element.interval | quote }},
           path: {{ $element.path | quote }},
           {{- if eq $element.name "jrm-exporter" }}
