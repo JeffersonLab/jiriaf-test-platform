@@ -38,5 +38,5 @@ data:
     # export PGID_FILE=/global/homes/j/jlabtsai/pgid
     # export CMDS_FOR_CONFIG="virtual-kubelet"
 
-    sleep 8
+    sleep 15
     apptainer run --bind /proc:/host_proc {{ .Values.Deployment.processExporterSettings.image }}
