@@ -5,11 +5,11 @@ Deployment:
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
 
   ersapSettings:
-    image: ~/ersap_v0.1.sif
+    image: gurjyan/ersap:v0.1 # ~/ersap_v0.1.sif
     cmd: /ersap/run-pipeline.sh #/ersap/run-pipeline-node.sh
   
   processExporterSettings:
-    image: ~/process-exporter_pgid-go.sif
+    image: jlabtsai/process-exporter:pgid-go # ~/process-exporter_pgid-go.sif
 
 Service:
 - name:  ersap-exporter
