@@ -1,0 +1,50 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: direct-stress
+data:
+  stress.sh: |
+    #!/bin/bash
+    apptainer run --env NUMBER=$1 --env TIME=$2 docker://jlabtsai/stress:latest > /dev/null
+
+---
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: direct-stress
+spec:
+  containers:
+    - name: direct-stress
+      image: direct-stress
+      command: ["bash", "/stress/stress.sh"]
+      args: ["300", "2"]
+      volumeMounts:
+        - name: direct-stress
+          mountPath: /stress
+  volumes:
+    - name: direct-stress
+      configMap:
+        name: direct-stress
+  nodeSelector:
+    kubernetes.io/role: agent
+  tolerations:
+    - key: "virtual-kubelet.io/provider"
+      value: "mock"
+      effect: "NoSchedule"
+
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: jiriaf.nodetype
+          operator: In
+          values:
+          - "ejfat"
+        - key: jiriaf.site
+          operator: In
+          values:
+          - "ornl"
