@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Usage: ./deploy.sh <ID> <ersap-exporter-port> <process-exporter-port> <ejfat-exporter-port> <jrm-exporter-port> <ersap-queue-port>
-
-if [ "$#" -ne 6 ]; then
-  echo "Usage: $0 <ID> <ersap-exporter-port> <process-exporter-port> <ejfat-exporter-port> <jrm-exporter-port> <ersap-queue-port>"
+# Usage: ./launch_job.sh <ID> <INDEX> <ersap-exporter-port> <jrm-exporter-port>
+if [ "$#" -ne 4 ]; then
+  echo "Usage: ./launch_job.sh <ID> <INDEX> <ersap-exporter-port> <jrm-exporter-port>"
   exit 1
 fi
 
