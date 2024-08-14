@@ -1,7 +1,7 @@
 Deployment:
   name: this-name-is-changing
   namespace: default
-  replicas: 1
+  replicas: 2
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
 
   ersapSettings:
@@ -48,41 +48,41 @@ Service:
   path: /metrics/resource
   interval: 15s
 
-# - name:  ersap-exporter
-#   node: ornl-1
-#   protocol: TCP
-#   port:  20004
-#   originalPort: 2221
-#   path: /metrics
-#   interval: 15s
-# - name: process-exporter
-#   node: ornl-1
-#   protocol: TCP
-#   port: 20005
-#   originalPort: 1776
-#   path: /metrics
-#   interval: 15s
-# - name: ejfat-exporter
-#   node: ornl-1
-#   protocol: TCP
-#   port: 20006
-#   originalPort: 8088
-#   path: /metrics
-#   interval: 15s
-# - name: jrm-exporter
-#   node: ornl-1
-#   protocol: TCP
-#   port:  10001
-#   originalPort: 10001
-#   path: /metrics/resource
-#   interval: 15s
-# - name: ersap-queue
-#   node: ornl-1
-#   protocol: TCP
-#   port:  20007
-#   originalPort: 2222
-#   path: /metrics/resource
-#   interval: 15s
+- name:  ersap-exporter
+  node: ornl-1
+  protocol: TCP
+  port:  20004
+  originalPort: 2221
+  path: /metrics
+  interval: 15s
+- name: process-exporter
+  node: ornl-1
+  protocol: TCP
+  port: 20005
+  originalPort: 1776
+  path: /metrics
+  interval: 15s
+- name: ejfat-exporter
+  node: ornl-1
+  protocol: TCP
+  port: 20006
+  originalPort: 8088
+  path: /metrics
+  interval: 15s
+- name: jrm-exporter
+  node: ornl-1
+  protocol: TCP
+  port:  10001
+  originalPort: 10001
+  path: /metrics/resource
+  interval: 15s
+- name: ersap-queue
+  node: ornl-1
+  protocol: TCP
+  port:  20007
+  originalPort: 2222
+  path: /metrics/resource
+  interval: 15s
 
 # - name:  ersap-exporter
 #   node: ornl-2
