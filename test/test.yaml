@@ -19,7 +19,7 @@ spec:
     - name: direct-stress
       image: direct-stress
       command: ["bash"]
-      args: ["300", "2"]
+      args: ["2", 300"]
       volumeMounts:
         - name: direct-stress
           mountPath: direct-stress
