@@ -1,31 +1,28 @@
 #!/bin/bash
 
-# test via template
-for i in $(seq 1 25)
-do
-    i_padded=$(printf "%02d" $i)
-    echo $i_padded
-    helm template ersap$i ersap --set name=$i_padded
-    sleep 5
-done
+# Usage: ./deploy.sh <ID> <ersap-exporter-port> <process-exporter-port> <ejfat-exporter-port> <jrm-exporter-port> <ersap-queue-port>
 
-# gradually increase the number of ersap instances every 5 seconds
-for i in $(seq 1 40)
-do
-    i_padded=$(printf "%02d" $i)
-    echo $i_padded
-    helm install ersap$i ersap --set name=$i_padded
-    # sleep 30
-done
+if [ "$#" -ne 6 ]; then
+  echo "Usage: $0 <ID> <ersap-exporter-port> <process-exporter-port> <ejfat-exporter-port> <jrm-exporter-port> <ersap-queue-port>"
+  exit 1
+fi
+
+ID=$1
+INDEX=$2
+ERSAP_EXPORTER_PORT=$3
+JRM_EXPORTER_PORT=$4
 
 
+# Calculate other ports based on ERSAP_EXPORTER_PORT
+PROCESS_EXPORTER_PORT=$((ERSAP_EXPORTER_PORT + 1))
+EJFAT_EXPORTER_PORT=$((ERSAP_EXPORTER_PORT + 2))
+ERSAP_QUEUE_PORT=$((ERSAP_EXPORTER_PORT + 3))
 
-# gradually remove the number of ersap instances every 5 seconds
-for i in $(seq 1 25)
-do
-    helm uninstall ersap$i
-    # sleep 30
-done
-
-
-
+helm install "$ID-job-$INDEX" job/ \
+  --set Deployment.name="$ID-job-$INDEX" \
+  --set Deployment.serviceMonitorLabel=$ID \
+  --set Service[0].port="$ERSAP_EXPORTER_PORT" \
+  --set Service[1].port="$PROCESS_EXPORTER_PORT" \
+  --set Service[2].port="$EJFAT_EXPORTER_PORT" \
+  --set Service[3].port="$JRM_EXPORTER_PORT" \
+  --set Service[4].port="$ERSAP_QUEUE_PORT"
