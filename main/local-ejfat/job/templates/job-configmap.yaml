@@ -8,8 +8,12 @@ data:
     #!/bin/bash
     # export LB_HOST=$1
     # export PR_HOST=$2
-    # apptainer run {{ .Values.Deployment.ersapSettings.image }} -- {{ .Values.Deployment.ersapSettings.cmd }}
-    shifter --image={{ .Values.Deployment.ersapSettings.image  }} -- {{ .Values.Deployment.ersapSettings.cmd }}
+    # job-configmap.yaml
+    {{- if eq .Values.Deployment.site "perlmutter" }}
+        shifter --image=gurjyan/ersap:v0.1 -- /ersap/run-pipeline.sh
+    {{- else }}
+        apptainer run ~/ersap_v0.1.sif -- /ersap/run-pipeline-node.sh
+    {{- end }}
 
 
 
@@ -40,5 +44,8 @@ data:
     # export CMDS_FOR_CONFIG="virtual-kubelet"
 
     sleep 15
-    # apptainer run --bind /proc:/host_proc {{ .Values.Deployment.processExporterSettings.image }}
-    shifter --image={{ .Values.Deployment.processExporterSettings.image }} -V /proc:/host_proc --entrypoint
+    {{- if eq .Values.Deployment.site "perlmutter" }}
+        shifter --image=jlabtsai/process-exporter:pgid-go -V /proc:/host_proc --entrypoint
+    {{- else }}
+        apptainer run --bind /proc:/host_proc ~/process-exporter_pgid-go.sif
+    {{- end }}

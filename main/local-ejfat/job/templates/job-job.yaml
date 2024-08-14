@@ -63,4 +63,4 @@ spec:
               - key: jiriaf.site
                 operator: In
                 values:
-                - "perlmutter"
+                - {{ .Values.Deployment.site}}

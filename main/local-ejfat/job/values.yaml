@@ -3,13 +3,7 @@ Deployment:
   namespace: default
   replicas: 1
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
-
-  ersapSettings:
-    image: gurjyan/ersap:v0.1 # ~/ersap_v0.1.sif
-    cmd: /ersap/run-pipeline.sh #/ersap/run-pipeline-node.sh
-  
-  processExporterSettings:
-    image: jlabtsai/process-exporter:pgid-go # ~/process-exporter_pgid-go.sif
+  site: perlmutter #ornl
 
 Service:
 - name:  ersap-exporter
