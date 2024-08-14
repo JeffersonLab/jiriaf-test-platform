@@ -6,10 +6,10 @@ if [ "$#" -ne 4 ]; then
   exit 1
 fi
 
-ID=$1
-INDEX=$2
-ERSAP_EXPORTER_PORT=$3
-JRM_EXPORTER_PORT=$4
+ID=$1 #jlab-100g-nersc-ornl
+INDEX=$2 #0
+ERSAP_EXPORTER_PORT=$3 #20000
+JRM_EXPORTER_PORT=$4 #10000
 
 
 # Calculate other ports based on ERSAP_EXPORTER_PORT
