@@ -8,7 +8,7 @@ data:
     #!/bin/bash
     # export LB_HOST=$1
     # export PR_HOST=$2
-    shifter --image={{ .Values.Deployment.ersap_settings.image }} -- {{ .Values.Deployment.ersap_settings.cmd }}
+    apptainer run {{ .Values.Deployment.ersap_settings.image }} -- {{ .Values.Deployment.ersap_settings.cmd }}
 
 ---
 kind: ConfigMap
@@ -36,4 +36,4 @@ data:
     export CMDS_FOR_CONFIG="virtual-kubelet"
 
     sleep {{ .Values.Deployment.prometheus_settings.wait_time_before_start }}
-    shifter --image={{ .Values.Deployment.prometheus_settings.image }} {{ .Values.Deployment.prometheus_settings.cmd }}
+    apptainer run --bind /proc:/host_proc {{ .Values.Deployment.prometheus_settings.image }} {{ .Values.Deployment.prometheus_settings.cmd }}

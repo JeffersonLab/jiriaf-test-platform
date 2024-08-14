@@ -65,5 +65,5 @@ spec:
               - key: jiriaf.site
                 operator: In
                 values:
-                - "nersc"
+                - "ornl"
       

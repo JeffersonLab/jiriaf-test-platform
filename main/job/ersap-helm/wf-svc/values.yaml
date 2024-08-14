@@ -4,12 +4,12 @@ Deployment:
   replicas: 1
 
   ersap_settings:
-    image: docker:gurjyan/ersap:v0.1
+    image: ~/ersap_v0.1.sif
     cmd: /ersap/run-pipeline-node.sh
 
   prometheus_settings:
-    image: jlabtsai/process-exporter:pgid-go
-    cmd: -V /proc:/host_proc --entrypoint
+    image: ~/process-exporter_pgid-go.sif
+    cmd: ""
     wait_time_before_start: 8
 
 Service:
