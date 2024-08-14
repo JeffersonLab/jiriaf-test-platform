@@ -16,12 +16,22 @@ PROCESS_EXPORTER_PORT=$((ERSAP_EXPORTER_PORT + 1))
 EJFAT_EXPORTER_PORT=$((ERSAP_EXPORTER_PORT + 2))
 ERSAP_QUEUE_PORT=$((ERSAP_EXPORTER_PORT + 3))
 
-# Update values.yaml using sed
-sed -i '' "s/Service[0].port:.*/Service[0].port: $ERSAP_EXPORTER_PORT/" values.yaml
-sed -i '' "s/Service[1].port:.*/Service[1].port: $PROCESS_EXPORTER_PORT/" values.yaml
-sed -i '' "s/Service[2].port:.*/Service[2].port: $EJFAT_EXPORTER_PORT/" values.yaml
-sed -i '' "s/Service[3].port:.*/Service[3].port: $JRM_EXPORTER_PORT/" values.yaml
-sed -i '' "s/Service[4].port:.*/Service[4].port: $ERSAP_QUEUE_PORT/" values.yaml
+# Function to update a specific port in values.yaml
+update_port() {
+  local service_index=$1
+  local new_port=$2
+  awk -v idx="$service_index" -v port="$new_port" '
+    $1 == "Service["idx"].port:" { $2 = port }
+    { print }
+  ' values.yaml > values.tmp && mv values.tmp values.yaml
+}
+
+# Update values.yaml
+update_port 0 $ERSAP_EXPORTER_PORT
+update_port 1 $PROCESS_EXPORTER_PORT
+update_port 2 $EJFAT_EXPORTER_PORT
+update_port 3 $JRM_EXPORTER_PORT
+update_port 4 $ERSAP_QUEUE_PORT
 
 # Run Helm install
 helm install "$ID-job-$INDEX" job/ \
