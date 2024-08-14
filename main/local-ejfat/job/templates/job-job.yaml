@@ -60,10 +60,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: jiriaf.nodetype
-                operator: In
-                values:
-                - "ejfat"
               - key: jiriaf.site
                 operator: In
                 values:
