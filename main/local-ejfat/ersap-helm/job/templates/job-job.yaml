@@ -23,9 +23,9 @@ spec:
           mountPath: wf
         resources:
           limits:
-            cpu: "256"
+            cpu: "128"
           requests:
-            cpu: "256"
+            cpu: "128"
       - name: prom
         image: prom
         command: ["bash"]
