@@ -5,7 +5,9 @@ metadata:
 data:
   stress.sh: |
     #!/bin/bash
-    apptainer run --env NUMBER=$1 --env TIME=$2 docker://jlabtsai/stress:latest > /dev/null
+    export NUMBER=$2
+    export TIME=$1
+    apptainer run ~/stress_latest.sif  > /dev/null
 
 ---
 
@@ -19,7 +21,7 @@ spec:
     - name: direct-stress
       image: direct-stress
       command: ["bash"]
-      args: ["2", 300"]
+      args: ["300", "2"]
       volumeMounts:
         - name: direct-stress
           mountPath: direct-stress
