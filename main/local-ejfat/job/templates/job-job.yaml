@@ -67,4 +67,4 @@ spec:
               - key: jiriaf.site
                 operator: In
                 values:
-                - "ornl"
+                - "perlmutter"
