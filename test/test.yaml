@@ -18,11 +18,11 @@ spec:
   containers:
     - name: direct-stress
       image: direct-stress
-      command: ["bash", "/stress/stress.sh"]
+      command: ["bash"]
       args: ["300", "2"]
       volumeMounts:
         - name: direct-stress
-          mountPath: /stress
+          mountPath: direct-stress
   volumes:
     - name: direct-stress
       configMap:
