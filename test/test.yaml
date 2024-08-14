@@ -35,16 +35,16 @@ spec:
       effect: "NoSchedule"
 
 
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: jiriaf.nodetype
-          operator: In
-          values:
-          - "ejfat"
-        - key: jiriaf.site
-          operator: In
-          values:
-          - "ornl"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: jiriaf.nodetype
+            operator: In
+            values:
+            - "ejfat"
+          - key: jiriaf.site
+            operator: In
+            values:
+            - "ornl"
