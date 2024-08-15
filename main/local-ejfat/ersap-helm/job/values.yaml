@@ -8,7 +8,7 @@ Deployment:
   ejfatNode: "2"
 
   ersapSettings:
-    image: jlabtsai/ersap:thread #gurjyan/ersap:v0.1
+    image: gurjyan/ersap:v0.1 #jlabtsai/ersap:thread #gurjyan/ersap:v0.1
     cmd: /ersap/run-pipeline-node.sh
     file: /x.ersap
 
