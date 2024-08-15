@@ -1,15 +1,16 @@
 #!/bin/bash
 
-# Usage: ./launch_job.sh <ID> <INDEX> <ersap-exporter-port> <jrm-exporter-port>
-if [ "$#" -ne 4 ]; then
-  echo "Usage: $0 <ID> <INDEX> <ersap-exporter-port> <jrm-exporter-port>"
+# Usage: ./launch_job.sh <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-exporter-port>
+if [ "$#" -ne 5 ]; then
+  echo "Usage: $0 <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-exporter-port>"
   exit 1
 fi
 
 ID=$1 # jlab-100g-nersc-ornl
 INDEX=$2 # 0
-ERSAP_EXPORTER_PORT=$3 # 20000
-JRM_EXPORTER_PORT=$4 # 10000
+SITE=$3 # perlmutter or ornl
+ERSAP_EXPORTER_PORT=$4 # 20000
+JRM_EXPORTER_PORT=$5 # 10000
 
 # Calculate other ports based on ERSAP_EXPORTER_PORT
 PROCESS_EXPORTER_PORT=$((ERSAP_EXPORTER_PORT + 1))
@@ -18,6 +19,7 @@ ERSAP_QUEUE_PORT=$((ERSAP_EXPORTER_PORT + 3))
 
 # Run Helm install
 helm install "$ID-job-$INDEX" job/ \
+  --set Deployment.site=$SITE \
   --set Deployment.name="$ID-job-$INDEX" \
   --set Deployment.serviceMonitorLabel=$ID \
   --set Service[0].name="ersap-exporter" \
