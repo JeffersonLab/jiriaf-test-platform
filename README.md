@@ -25,7 +25,8 @@ slurm-nersc-ornl/launch_job.sh <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-ex
 
 ### Example:
 ```bash
-slurm-nersc-ornl/launch_job.sh $ID 0 nersc 20000 10000
+ID=jlab-100g-nersc-ornl
+slurm-nersc-ornl/launch_job.sh $ID perlmutter-0 perlmutter 20000 10000
 ```
 
 ### Parameters:
@@ -45,7 +46,8 @@ helm install $ID-job-<INDEX> local-ejfat/job/ --set Deployment.name=$ID-job-<IND
 
 ### Example:
 ```bash
-helm install $ID-job-0 local-ejfat/job/ --set Deployment.name=$ID-job-0 --set Deployment.serviceMonitorLabel=$ID
+ID=jlab-100g-nersc-ornl
+helm install $ID-job-ejfat-0 local-ejfat/job/ --set Deployment.name=$ID-job-ejfat-0 --set Deployment.serviceMonitorLabel=$ID
 ```
 
 ### Parameters:
