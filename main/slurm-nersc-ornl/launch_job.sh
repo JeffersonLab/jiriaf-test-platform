@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./launch_job.sh <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-exporter-port>
+# Usage: ./launch_job.sh <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-exporter-port>, For example: ./launch_job.sh jlab-100g-nersc-ornl 0 perlmutter 20000 10000
 if [ "$#" -ne 5 ]; then
   echo "Usage: $0 <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-exporter-port>"
   exit 1
