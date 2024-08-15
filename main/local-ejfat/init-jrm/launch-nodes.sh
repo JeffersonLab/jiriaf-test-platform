@@ -11,15 +11,7 @@ do
         i="fs"
     fi
     ssh -NfR $APISERVER_PORT:localhost:$APISERVER_PORT ejfat-$i  
-    # echo "100""$i_padded"
-    # ssh -NfL *:100$i_padded:localhost:100$i_padded ejfat-$i
-    # echo "200""$i_padded"
-    # ssh -NfL *:200$i_padded:localhost:2221 ejfat-$i
-    # echo "300""$i_padded"
-    # ssh -NfL *:300$i_padded:localhost:1776 ejfat-$i
-    # echo "400""$i_padded"
-    # ssh -NfL *:400$i_padded:localhost:8088 ejfat-$i
-
+    
     scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/init-jrm/node-setup.sh ejfat-$i:~/
     # run node-setup.sh on each node
     ssh ejfat-$i "chmod +x node-setup.sh && ./node-setup.sh $i $(ping -c 1 ejfat-$i | awk -F'[()]' '/PING/{print $2}')" &
