@@ -41,7 +41,7 @@ data:
 
 
     export GROUP_FOR_CONFIG={{ "{{.ExeBase}}:{{.Username}}:{{.PID}}" | quote }}
-    export CMDS_FOR_CONFIG="/ersap"
+    export CMDS_FOR_CONFIG="java"
 
     sleep 15
     {{- if eq .Values.Deployment.site "perlmutter" }}
