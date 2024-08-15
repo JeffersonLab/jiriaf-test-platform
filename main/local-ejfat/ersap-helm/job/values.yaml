@@ -9,7 +9,7 @@ Deployment:
 
   ersapSettings:
     image: gurjyan/ersap:v0.1 #jlabtsai/ersap:thread #gurjyan/ersap:v0.1
-    cmd: /ersap/run-pipeline-node.sh
+    cmd: /ersap/run-pipeline.sh
     file: /x.ersap
 
 Service:
