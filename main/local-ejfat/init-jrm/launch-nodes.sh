@@ -11,8 +11,7 @@ do
         i="fs"
     fi
     ssh -NfR $APISERVER_PORT:localhost:$APISERVER_PORT ejfat-$i  
-    
-    scp -r $HOME/JIRIAF/JIRIAF-test-platform/main/init-jrm/node-setup.sh ejfat-$i:~/
+    scp -r $HOME/JIRIAF/jiriaf-test-platform/main/local-ejfat/init-jrm/node-setup.sh ejfat-$i:~/
     # run node-setup.sh on each node
     ssh ejfat-$i "./node-setup.sh $i $(ping -c 1 ejfat-$i | awk -F'[()]' '/PING/{print $2}')" &
     sleep 3
