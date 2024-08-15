@@ -28,21 +28,20 @@ metadata:
 data:
   prom.sh: |
     #!/bin/bash
-    for dir in $(ls -t ~/{{ .Values.Deployment.namespace }}/)
-    do
-      if [ -d ~/{{ .Values.Deployment.namespace }}/$dir ]
-      then
-        # read the pgid file
-        export PGID_FILE=~/{{ .Values.Deployment.namespace }}/$dir/containers/wf/pgid
-        echo "PGID_FILE: $PGID_FILE"
-        break
-      fi
-    done
+    # for dir in $(ls -t ~/{{ .Values.Deployment.namespace }}/)
+    # do
+    #   if [ -d ~/{{ .Values.Deployment.namespace }}/$dir ]
+    #   then
+    #     # read the pgid file
+    #     export PGID_FILE=~/{{ .Values.Deployment.namespace }}/$dir/containers/wf/pgid
+    #     echo "PGID_FILE: $PGID_FILE"
+    #     break
+    #   fi
+    # done
 
 
     export GROUP_FOR_CONFIG={{ "{{.ExeBase}}:{{.Username}}:{{.PID}}" | quote }}
-    # export PGID_FILE=/global/homes/j/jlabtsai/pgid
-    # export CMDS_FOR_CONFIG="virtual-kubelet"
+    export CMDS_FOR_CONFIG="/ersap"
 
     sleep 15
     {{- if eq .Values.Deployment.site "perlmutter" }}
