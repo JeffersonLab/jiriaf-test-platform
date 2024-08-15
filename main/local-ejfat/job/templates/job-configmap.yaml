@@ -12,6 +12,7 @@ data:
     {{- if eq .Values.Deployment.site "perlmutter" }}
         shifter --image=gurjyan/ersap:v0.1 -- /ersap/run-pipeline.sh
     {{- else }}
+        export PR_HOST=$(hostname -I | awk '{print $2}')
         apptainer run ~/ersap_v0.1.sif -- /ersap/run-pipeline-node.sh
     {{- end }}
 
