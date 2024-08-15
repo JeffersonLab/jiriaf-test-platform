@@ -60,7 +60,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: "kubernetes.io/hostname"
+              - key: jiriaf.site
                 operator: In
                 values:
-                - "ejfat-{{ .Values.Deployment.ejfatNode}}"
+                - "ejfat"
