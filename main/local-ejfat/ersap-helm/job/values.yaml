@@ -4,8 +4,8 @@ Deployment:
   replicas: 1
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
 
-  cpuUsage: "16"
-  ejfatNode: "5"
+  cpuUsage: "128"
+  ejfatNode: "2"
 
   ersapSettings:
     image: jlabtsai/ersap:thread #gurjyan/ersap:v0.1
