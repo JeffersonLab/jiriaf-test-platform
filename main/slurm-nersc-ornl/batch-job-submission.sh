@@ -11,7 +11,7 @@ TOTAL_NUMBER=2
 
 # Loop to run the script from 0 to total number - 1
 for ((i=0; i<TOTAL_NUMBER; i++)); do
-  INDEX="perlmutter-$i"
+  INDEX="$SITE-$i"
   ERSAP_EXPORTER_PORT=$((ERSAP_EXPORTER_PORT_BASE + i * 4))
   JRM_EXPORTER_PORT=$((JRM_EXPORTER_PORT_BASE + i))
   
