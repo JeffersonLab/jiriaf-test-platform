@@ -37,7 +37,9 @@ data:
     echo -e "set session s1\nset outputFilePrefix s1\nset outputDir \$HOME/ersap/output\nset logDir \$HOME/ersap/log\nset threads {{.Values.Deployment.cpuUsage}}\nrun local" > ~/x.ersap
 
     docker pull {{ .Values.Deployment.ersapSettings.image }}
-    docker run --name vd-ersap -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" -v $HOME/x.ersap:/x.ersap --entrypoint {{ .Values.Deployment.ersapSettings.cmd }} {{ .Values.Deployment.ersapSettings.image }}  {{ .Values.Deployment.ersapSettings.file }}
+    # docker run --name vd-ersap -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" -v $HOME/x.ersap:/x.ersap --entrypoint {{ .Values.Deployment.ersapSettings.cmd }} {{ .Values.Deployment.ersapSettings.image }}  {{ .Values.Deployment.ersapSettings.file }}
+    docker run --name vd-ersap -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint={{ .Values.Deployment.ersapSettings.cmd }} {{ .Values.Deployment.ersapSettings.image }}
+
     #####--cpus={{.Values.Deployment.cpuUsage}}
 
     # Get the ID of the last run container
