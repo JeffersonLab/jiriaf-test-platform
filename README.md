@@ -1,24 +1,59 @@
-# Run Tests by Helm Chart
-Steps to run tests by Helm chart.
-1. Define the ID of the test record. For example, `export ID=ersap-test`. This ID will be used for Helm chart name.
-2. Run [helm install $ID-prom prom/ --set Deployment.name=$ID](main/job/prom). This will create prometheus instance in the cluster for the test.
-3. Run [helm install $ID-job job/ --set Deployment.name=$ID-job --set Deployment.serviceMonitorLabel=$ID](main/job/ersap-helm/job). This will create a job in the cluster for the test. ⚠️ Notice that `Deployment.serviceMonitorLabel` can be set to a identical value for multiple deployments if they are supposed to be monitored by the same prometheus instance.
+
+# Workflow Setup Instructions
+
+Follow these steps to deploy and run workflows using Prometheus on Perlmutter, ORNL, and EJFAT nodes.
+
+## 1. Define the Project ID
+
+Set `ID` as your project identifier. This will also serve as the name of the Prometheus instance.
+
+## 2. Start the Prometheus Instance
+
+Run the following command to start a Prometheus instance with the defined project ID:
 
 ```bash
-#!/bin/bash
-
-ID=$1
 helm install $ID-prom prom/ --set Deployment.name=$ID
-helm install $ID-job job/ --set Deployment.name=$ID-job --set Deployment.serviceMonitorLabel=$ID
 ```
 
+## 3. Run Workflows on Perlmutter and ORNL
 
-# Test Record
+To start a workflow on Perlmutter or ORNL, use the `launch_job.sh` script with the following syntax:
 
-| ID | Helm chart | ersap version | num pipes | time period                                | compute site | pipes started at the same time | test goal | result                        |
-|----|------------|---------------|-----------|-------------------------------------------|--------------|--------------------------------|------------|-------------------------------|
-| 0  | ersap-test | v0.1          | 6         | 2024-05-31 03:35:40 to 2024-05-31 04:24:19UTC | ejfat        | Y                              | init  | only one pipe survives after 15 mins |
-| 1  | ersap-test2 | v0.2         | 6         | 2024-06-01 00:57:00 to 2024-06-01 02:01:37UTC | ejfat        | Y                              | check if all pipes will survive after 15 mins. | no |
-| 2  | ersap-test3 | v0.1         | 3         | 2024-06-01 03:40:16 to 2024-06-01 04:55:09UTC | ejfat        | N                              | intermittent start of pipes, checking if pipes will survive. | one pipe survives at a time |
-| 3  | ersap-test4 | v0.2         | 6         | 2024-06-01 04:47:50 to 2024-06-01 14:56:34UTC | ejfat        | N                              | using v0.2 for the test ID-2. | same result as ID-2. |
+```bash
+slurm-nersc-ornl/launch_job.sh <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-exporter-port>
+```
 
+### Example:
+```bash
+slurm-nersc-ornl/launch_job.sh $ID 0 nersc 20000 10000
+```
+
+### Parameters:
+- `<ID>`: The project ID.
+- `<INDEX>`: The index of the workflow (must be unique).
+- `<SITE>`: The site where the workflow is running. Use either `perlmutter` or `ornl`.
+- `<ersap-exporter-port>`: The port number for the ERSAP exporter.
+- `<jrm-exporter-port>`: The port number for the JRM exporter.
+
+## 4. Run Workflows on EJFAT Nodes
+
+To start a workflow on EJFAT nodes, use the `helm install` command with the following syntax:
+
+```bash
+helm install $ID-job-<INDEX> local-ejfat/job/ --set Deployment.name=$ID-job-<INDEX> --set Deployment.serviceMonitorLabel=$ID
+```
+
+### Example:
+```bash
+helm install $ID-job-0 local-ejfat/job/ --set Deployment.name=$ID-job-0 --set Deployment.serviceMonitorLabel=$ID
+```
+
+### Parameters:
+- `<ID>`: The project ID.
+- `<INDEX>`: The index of the workflow (must be unique).
+
+## Additional Notes
+
+- Ensure that `<INDEX>` is unique for each workflow you start.
+- The `<ersap-exporter-port>` and `<jrm-exporter-port>` values are specified when launching the JRMs using the Docker images `jlabtsai/jrm-fw:perlmutter` or `jlabtsai/jrm-fw:ornl`.
+- For more details on JRM setup and configurations, refer to the [JIRIAF Fireworks GitHub repository](https://github.com/JeffersonLab/jiriaf-fireworks.git).
