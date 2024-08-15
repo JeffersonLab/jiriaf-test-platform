@@ -1,4 +1,0 @@
-global:
-  scrape_interval: 30s
-  scrape_timeout: 20s 
-
