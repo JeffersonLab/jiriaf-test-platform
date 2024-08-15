@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export NODENAME=ejfat-"$1"
+export NODENAME=jrm-ejfat-"$1"
 export KUBECONFIG="$HOME/.kube/config"
 export VKUBELET_POD_IP=$2
 # set kubelet port as 10000 + $1
