@@ -1,5 +1,4 @@
 #!/bin/bash
-# run this on login04
 
 export APISERVER_PORT="38687" #35679
 
