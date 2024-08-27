@@ -40,7 +40,7 @@ data:
     # done
 
 
-    export GROUP_FOR_CONFIG={{ "{{.ExeBase}}:{{.Username}}:{{.PID}}" | quote }}
+    export GROUP_FOR_CONFIG={{ "{{.ExeBase}}:{{.Username}}:{{.Comm}}" | quote }}
     export CMDS_FOR_CONFIG="java"
 
     sleep 15
