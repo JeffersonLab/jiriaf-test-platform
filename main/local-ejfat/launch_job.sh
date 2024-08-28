@@ -1,4 +1,5 @@
 #!/bin/bash
 
 ID=jlab-100g-nersc-ornl
-helm install $ID-job-ejfat-0 job/ --set Deployment.name=$ID-job-ejfat-0 --set Deployment.serviceMonitorLabel=$ID
+INDEX=2
+helm install $ID-job-ejfat-$INDEX job/ --set Deployment.name=$ID-job-ejfat-$INDEX --set Deployment.serviceMonitorLabel=$ID
