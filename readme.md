@@ -1,6 +1,6 @@
 # Workflow Setup, Deployment, and Monitoring Guide in JIRIAF
 
-This document provides a comprehensive guide for setting up and running workflows in the JIRIAF (Jefferson Lab Intelligent Real-time Information Analysis Framework) system. It covers the following key aspects:
+This document provides a comprehensive guide for setting up and running workflows in JIRIAF. It covers the following key aspects:
 
 1. Project Identification: Defining a unique project ID for your workflow.
 2. Prometheus Setup: Deploying a Prometheus instance for monitoring using Helm.
