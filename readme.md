@@ -4,19 +4,9 @@ This document provides a comprehensive guide for setting up and running workflow
 
 1. Project Identification: Defining a unique project ID for your workflow.
 2. Prometheus Setup: Deploying a Prometheus instance for monitoring using Helm.
-3. Workflow Deployment:
-   - On Perlmutter and ORNL: Using Helm charts with specific parameters.
-   - On EJFAT Nodes: Using Helm charts with custom configurations.
-4. Additional Components: EJFAT node initialization, local EJFAT Helm charts, SLURM NERSC-ORNL Helm charts, and Prometheus monitoring setup.
+3. Workflow Deployment: Deploying workflows on EJFAT nodes and SLURM NERSC-ORNL nodes using Helm charts.
+4. JRM Setup on Local EJFAT Nodes: Setting up JRM on EJFAT nodes.
 
-The guide includes step-by-step instructions for:
-- Starting a Prometheus instance
-- Running workflows on Perlmutter and ORNL using SLURM and Helm
-- Deploying workflows on EJFAT nodes using Helm
-
-It also provides examples of commands, explanations of parameters, and references to additional resources such as the JIRIAF Fireworks GitHub repository for more detailed JRM setup and configurations.
-
-This guide aims to provide researchers and developers with a clear, efficient approach to deploy and manage workflows across various environments within the JIRIAF ecosystem, ensuring proper monitoring and integration across different platforms.
 
 ## Components
 
