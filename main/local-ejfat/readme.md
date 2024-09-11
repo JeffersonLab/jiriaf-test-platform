@@ -92,6 +92,15 @@ helm uninstall <release-name> -n <namespace>
 
 Replace `<release-name>` with the name used during installation (e.g., `$ID-job-ejfat-0`).
 
+**Important:** After uninstalling the Helm release, you must also manually delete the containers created by the Charts on the EJFAT nodes. To do this:
+
+1. Log in to each EJFAT node used in your deployment.
+2. List all containers: `docker ps -a`
+3. Identify the containers related to your job.
+4. Remove these containers using: `docker rm -f <container-id>`
+
+This manual cleanup step is necessary because the containers are created directly on the EJFAT nodes and are not managed by Kubernetes.
+
 ## Troubleshooting
 
 - Check pod status: `kubectl get pods -n <namespace>`

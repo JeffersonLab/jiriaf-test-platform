@@ -54,7 +54,7 @@ This will set up all the specified EJFAT nodes (currently set to initialize node
 - To change the number of nodes or their range, modify the `seq` command in `launch-nodes.sh`:
 
 ```bash
-for i in $(seq <start> <end>)
+for i in $(seq <start> <end>) # This represents the node names, e.g. ejfat-1, ejfat-2, ejfat-3, etc.
 ```
 
 - To adjust node-specific settings, modify the `node-setup.sh` script. Key variables include:

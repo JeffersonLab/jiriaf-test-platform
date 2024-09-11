@@ -14,24 +14,39 @@ The main chart is located in the [`job/`](main/slurm-nersc-ornl/job/) directory.
 - [`values.yaml`](main/slurm-nersc-ornl/job/values.yaml): Default configuration values
 - Templates in the [`templates/`](main/slurm-nersc-ornl/job/templates/) directory
 
+
 ## 3. Customizing the Deployment
 
 Edit the [`values.yaml`](main/slurm-nersc-ornl/job/values.yaml) file to customize your deployment. Key settings include:
 
-
-```1:7:main/slurm-nersc-ornl/job/values.yaml
+```yaml:main/slurm-nersc-ornl/job/values.yaml
 Deployment:
   name: this-name-is-changing
   namespace: default
   replicas: 1
-  serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
+  serviceMonitorLabel: <ID> # This is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
   site: perlmutter #ornl
-
 ```
 
+### Port Configuration
+
+The `ersap-exporter-port` serves as the base port for other services. Subsequent services increment their port numbers from this base, ensuring consistent and easily manageable port assignments. Here's an illustration of how the ports are defined:
+
+```
+ersap-exporter-port (base): 20000
+│
+├─ process-exporter: base + 1 = 20001
+│
+├─ ejfat-exporter:   base + 2 = 20002
+│
+├─ jrm-exporter:     10000 (exception to the pattern)
+│
+└─ ersap-queue:      base + 3 = 20003
+```
+
+This approach allows for easy scaling and management of port assignments across multiple services.
 
 ## 4. Launching a Job
-
 Use the [`launch_job.sh`](main/slurm-nersc-ornl/launch_job.sh) script to deploy a job:
 
 ```shell
@@ -44,6 +59,26 @@ Example:
 ```
 
 This script sets up the necessary parameters and runs a Helm install command.
+
+### Custom Port Configuration
+
+In some cases, you may need to specify the ports for ERSAP_EXPORTER_PORT, PROCESS_EXPORTER_PORT, EJFAT_EXPORTER_PORT, and ERSAP_QUEUE_PORT explicitly. To do this:
+
+1. Open the [`launch_job.sh`](main/slurm-nersc-ornl/launch_job.sh) script in a text editor.
+2. Locate the section where these environment variables are calculated.
+3. Replace the calculations with your desired port numbers. For example:
+
+```bash
+ERSAP_EXPORTER_PORT=20000
+PROCESS_EXPORTER_PORT=20001
+EJFAT_EXPORTER_PORT=20002
+ERSAP_QUEUE_PORT=20003
+```
+
+4. Save the changes to the script.
+5. Run the script as described above.
+
+This allows for more fine-grained control over port assignments when necessary.
 
 ## 5. Batch Job Submission
 
@@ -60,6 +95,8 @@ This script will create multiple jobs with incrementing port numbers. The script
 - `ERSAP_EXPORTER_PORT_BASE`: The base port for ERSAP exporter (default: 20000)
 - `JRM_EXPORTER_PORT_BASE`: The base port for JRM exporter (default: 10000)
 - `TOTAL_NUMBER`: The total number of jobs to submit (passed as an argument)
+
+**Notice:** The ERSAP_EXPORTER_PORT_BASE, PROCESS_EXPORTER_PORT, EJFAT_EXPORTER_PORT, and ERSAP_QUEUE_PORT should be compatible with the ports created when JRMs are deployed. Refer to the [JIRIAF Fireworks repository](https://github.com/JeffersonLab/jiriaf-fireworks) for details on port management. Ensure that these port ranges align with the `custom_metrics_ports` in your site configuration file and use the JRM Launcher's port management commands to check or clear port ranges before deployment if necessary.
 
 ## 6. Understanding the Templates
 
