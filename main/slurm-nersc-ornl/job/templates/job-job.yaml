@@ -23,9 +23,9 @@ spec:
           mountPath: wf
         resources:
           limits:
-            cpu: "256"
+            cpu: {{ if eq .Values.Deployment.site "perlmutter" }}"256"{{ else if eq .Values.Deployment.site "ornl" }}"128"{{ else }}"256"{{ end }}
           requests:
-            cpu: "256"
+            cpu: {{ if eq .Values.Deployment.site "perlmutter" }}"256"{{ else if eq .Values.Deployment.site "ornl" }}"128"{{ else }}"256"{{ end }}
       - name: prom
         image: prom
         command: ["bash"]

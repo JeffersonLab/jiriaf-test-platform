@@ -1,7 +1,6 @@
 Deployment:
-  name: ersap-test4
+  name: <project-id>
   namespace: default
-  replicas: 1
 
 PersistentVolume:
   node: jiriaf2302-control-plane
