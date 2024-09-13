@@ -87,10 +87,10 @@ The charts set up Prometheus monitoring. The [`prom-servicemonitor.yaml`](main/l
 To delete a deployed job, use:
 
 ```bash
-helm uninstall <release-name> -n <namespace>
+helm uninstall $ID-job-ejfat-$INDEX
 ```
 
-Replace `<release-name>` with the name used during installation (e.g., `$ID-job-ejfat-0`).
+Replace `$ID-job-ejfat-$INDEX` with the name used during installation (e.g., `$ID-job-ejfat-0`).
 
 **Important:** After uninstalling the Helm release, you must also manually delete the containers created by the Charts on the EJFAT nodes. To do this:
 
@@ -103,9 +103,9 @@ This manual cleanup step is necessary because the containers are created directl
 
 ## Troubleshooting
 
-- Check pod status: `kubectl get pods -n <namespace>`
-- View pod logs: `kubectl logs <pod-name> -n <namespace>`
-- Describe a pod: `kubectl describe pod <pod-name> -n <namespace>`
+- Check pod status: `kubectl get pods`
+- View pod logs: `kubectl logs <pod-name>`
+- Describe a pod: `kubectl describe pod <pod-name>`
 
 ## Integration with Other Workflows
 
@@ -122,8 +122,6 @@ helm install $ID-prom prom/ --set Deployment.name=$ID
 3. Deploy EJFAT workflows using the instructions in this document.
 
 By following these steps, you can create a comprehensive workflow setup across different environments, all monitored by a single Prometheus instance.
-
-Remember to replace `<namespace>` with the actual namespace you're using (default is "default" unless specified otherwise).
 
 ## Additional Files
 

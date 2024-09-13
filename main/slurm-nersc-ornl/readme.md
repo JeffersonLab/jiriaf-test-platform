@@ -131,17 +131,15 @@ The charts set up Prometheus monitoring. The [`prom-servicemonitor.yaml`](main/s
 To delete a deployed job, use:
 
 ```shell
-helm uninstall <ID>-job-<SITE>-<NUMBER> -n <namespace>
+helm uninstall <ID>-job-<SITE>-<NUMBER>
 ```
 
 Replace `<ID>-job-<SITE>-<NUMBER>` with the name used during installation (e.g., `jlab-100g-nersc-ornl-job-perlmutter-0`).
 
 ## 10. Troubleshooting
 
-- Check pod status: `kubectl get pods -n <namespace>`
-- View pod logs: `kubectl logs <pod-name> -n <namespace>`
-- Describe a pod: `kubectl describe pod <pod-name> -n <namespace>`
-
-Remember to replace `<namespace>` with the actual namespace you're using (default is "default" unless specified otherwise).
+- Check pod status: `kubectl get pods`
+- View pod logs: `kubectl logs <pod-name>`
+- Describe a pod: `kubectl describe pod <pod-name>`
 
 This documentation provides a high-level overview of how to use and customize the Helm charts in the slurm-nersc-ornl folder. For more detailed information about specific components, refer to the individual files linked in this document.
