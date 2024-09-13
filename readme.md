@@ -91,7 +91,34 @@ For the simplest case to deploy ERSAP workflows, we ask to remove all the workfl
 
    **Critical:** The port values (ERSAP_EXPORTER_PORT, PROCESS_EXPORTER_PORT, EJFAT_EXPORTER_PORT, and ERSAP_QUEUE_PORT) used here must match the port assignments made during JRM deployment in step 3. Ensure that these ports align with the configuration in your site's setup. Before deployment, verify these port assignments and update them if necessary. Mismatched ports will result in monitoring failures and potential workflow issues.
 
-These scripts automate the process of deploying multiple jobs, incrementing the necessary parameters (like port numbers and indices) for each job. This approach is more efficient for deploying multiple workflows in both the EJFAT and SLURM NERSC-ORNL environments.
+8. Check and delete deployed jobs:
+
+   To check the jobs that are deployed:
+   ```bash
+   helm ls
+   ```
+
+   To delete a deployed job on SLURM NERSC-ORNL:
+   ```bash
+   helm uninstall $ID-job-$SITE-<number>
+   ```
+   Replace `$ID-job-$SITE-<number>` with the name used during installation (e.g., `jlab-100g-nersc-ornl-job-perlmutter-0`).
+
+   To delete a deployed job on EJFAT:
+   ```bash
+   helm uninstall $ID-job-ejfat-$INDEX
+   ```
+   Replace `$ID-job-ejfat-$INDEX` with the name used during installation (e.g., `jlab-100g-nersc-ornl-job-ejfat-0`).
+
+   **Important for EJFAT jobs:** After uninstalling the Helm release, you must also manually delete the containers created by the Charts on the EJFAT nodes:
+   1. Log in to each EJFAT node used in your deployment.
+   2. List all containers: `docker ps -a`
+   3. Identify the containers related to your job.
+   4. Remove these containers using: `docker rm -f <container-id>`
+
+   This manual cleanup step is necessary because the containers are created directly on the EJFAT nodes and are not managed by Kubernetes.
+
+
 
 ## Components
 

@@ -12,94 +12,103 @@ This guide explains how to use the Helm charts in the `local-ejfat` folder to de
 
 The main chart is located in the `job/` directory. Key files include:
 
-- [`Chart.yaml`](main/local-ejfat/job/Chart.yaml): Metadata for the chart
-- [`values.yaml`](main/local-ejfat/job/values.yaml): Default configuration values
-- Templates in the [`templates/`](main/local-ejfat/job/templates/) directory
+- `Chart.yaml`: Metadata for the chart
+- `values.yaml`: Default configuration values
+- Templates in the `templates/` directory
 
-## Deploying a Workflow
+## Step-by-Step Usage
 
-1. Set your project ID:
+1. **Setup Environment:**
+   - Ensure you have Helm 3 installed, access to a Kubernetes cluster, and kubectl configured.
+   - Clone the repository and navigate to the `local-ejfat` folder:
+     ```bash
+     git clone https://github.com/JeffersonLab/jiriaf-test-platform.git
+     cd jiriaf-test-platform/main/local-ejfat
+     ```
 
-```bash
-ID=your-project-id
-```
+2. **Set Project ID:**
+   - Export your project ID as an environment variable:
+     ```bash
+     export ID=your-project-id # e.g. jlab-100g-nersc-ornl
+     ```
 
-2. Deploy the workflow using Helm:
+3. **Customize Deployment (Optional):**
+   - Edit `job/values.yaml` to customize your deployment. Key settings include:
+     ```yaml
+     Deployment:
+       name: this-name-is-changing
+       namespace: default
+       replicas: 1
+       serviceMonitorLabel: ersap-test4
+       cpuUsage: "128"
+       ejfatNode: "2"
+     ersapSettings:
+       image: gurjyan/ersap:v0.1
+       cmd: /ersap/run-pipeline.sh
+       file: /x.ersap
+     ```
 
-```bash
-helm install $ID-job-ejfat-<INDEX> local-ejfat/job/ --set Deployment.name=$ID-job-ejfat-<INDEX> --set Deployment.serviceMonitorLabel=$ID
-```
+4. **Deploy Prometheus (If not already running):**
+  - Refer to `main/prom/readme.md` for instructions on how to install and configure Prometheus.
+  - Check if the prometheus instance is running:
+    ```bash
+    helm ls | grep "$ID-prom"
+    ```
+    If the command returns no results, it means there's no Prometheus instance for your project ID.
 
-Replace `<INDEX>` with a unique identifier for this workflow instance.
-
-For a quick deployment, you can use the [`launch_job.sh`](main/local-ejfat/launch_job.sh) script:
-
-
-```1:5:main/local-ejfat/launch_job.sh
-#!/bin/bash
-
-cd main/local-ejfat
-
-ID=jlab-100g-nersc-ornl
-INDEX=2
-helm install $ID-job-ejfat-$INDEX job/ --set Deployment.name=$ID-job-ejfat-$INDEX --set Deployment.serviceMonitorLabel=$ID
-```
+  - Install a Prometheus instance for your project if it's not already running:
+    ```bash
+     cd main/prom
+     helm install $ID-prom prom/ --set Deployment.name=$ID
+     ```
 
 
-## Customizing the Deployment
+5. **Deploy EJFAT Workflow:**
+   - Use the `launch_job.sh` script to deploy the EJFAT workflow:
+     ```bash
+     cd main/local-ejfat
+     ./launch_job.sh
+     ```
+   - This script uses the following variables:
+     - `ID`: The project identifier (e.g., jlab-100g-nersc-ornl)
+     - `INDEX`: A unique index for the job (e.g., 2)
 
-Edit the [`values.yaml`](main/local-ejfat/job/values.yaml) file to customize your deployment. Key settings include:
 
+6. **Monitor Deployment:**
+   - Check Helm release: `helm ls | grep $ID-job-ejfat-$INDEX-job`
+   - Check pod status: `kubectl get pods`
+   - Describe a pod: `kubectl describe pod <pod-name>`
 
-```1:14:main/local-ejfat/job/values.yaml
-Deployment:
-  name: this-name-is-changing
-  namespace: default
-  replicas: 1
-  serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
+7. **Manage Deployed Jobs:**
+   - List deployed jobs: `helm ls`
+   - Delete a deployed job:
+     ```bash
+     helm uninstall $ID-job-ejfat-<INDEX>
+     ```
 
-  cpuUsage: "128"
-  ejfatNode: "2"
+8. **Clean Up EJFAT Nodes:**
+   - After uninstalling the Helm release, manually delete containers on EJFAT nodes:
+     1. Log in to each EJFAT node used in your deployment.
+     2. List all containers: `docker ps -a`
+     3. Identify containers related to your job.
+     4. Remove these containers: `docker rm -f <container-id>`
 
-  ersapSettings:
-    image: gurjyan/ersap:v0.1 #jlabtsai/ersap:thread #gurjyan/ersap:v0.1
-    cmd: /ersap/run-pipeline.sh
-    file: /x.ersap
-
-```
-
+9. **Integration with Other Workflows:**
+   - Deploy workflows on Perlmutter or ORNL using the `slurm-nersc-ornl/launch_job.sh` script as described in the main README.
+   - Ensure all workflows use the same Prometheus instance for unified monitoring.
 
 ## Understanding the Templates
 
 Key template files:
 
-- [`job-job.yaml`](main/local-ejfat/job/templates/job-job.yaml): Defines the Kubernetes Job
-- [`job-configmap.yaml`](main/local-ejfat/job/templates/job-configmap.yaml): Contains scripts for the job containers
-- [`job-service.yaml`](main/local-ejfat/job/templates/job-service.yaml): Exposes the job as a Kubernetes Service
-- [`prom-servicemonitor.yaml`](main/local-ejfat/job/templates/prom-servicemonitor.yaml): Sets up Prometheus monitoring
+- `job-job.yaml`: Defines the Kubernetes Job
+- `job-configmap.yaml`: Contains scripts for the job containers
+- `job-service.yaml`: Exposes the job as a Kubernetes Service
+- `prom-servicemonitor.yaml`: Sets up Prometheus monitoring
 
 ## Monitoring
 
-The charts set up Prometheus monitoring. The [`prom-servicemonitor.yaml`](main/local-ejfat/job/templates/prom-servicemonitor.yaml) file defines how Prometheus should scrape metrics from your jobs.
-
-## Cleanup
-
-To delete a deployed job, use:
-
-```bash
-helm uninstall $ID-job-ejfat-$INDEX
-```
-
-Replace `$ID-job-ejfat-$INDEX` with the name used during installation (e.g., `$ID-job-ejfat-0`).
-
-**Important:** After uninstalling the Helm release, you must also manually delete the containers created by the Charts on the EJFAT nodes. To do this:
-
-1. Log in to each EJFAT node used in your deployment.
-2. List all containers: `docker ps -a`
-3. Identify the containers related to your job.
-4. Remove these containers using: `docker rm -f <container-id>`
-
-This manual cleanup step is necessary because the containers are created directly on the EJFAT nodes and are not managed by Kubernetes.
+The charts set up Prometheus monitoring. The `prom-servicemonitor.yaml` file defines how Prometheus should scrape metrics from your jobs.
 
 ## Troubleshooting
 
@@ -107,28 +116,12 @@ This manual cleanup step is necessary because the containers are created directl
 - View pod logs: `kubectl logs <pod-name>`
 - Describe a pod: `kubectl describe pod <pod-name>`
 
-## Integration with Other Workflows
-
-The local EJFAT charts are designed to work alongside workflows on Perlmutter and ORNL. For a complete setup:
-
-1. Start a Prometheus instance for your project:
-
-```bash
-helm install $ID-prom prom/ --set Deployment.name=$ID
-```
-
-2. Deploy workflows on Perlmutter or ORNL using the `slurm-nersc-ornl/launch_job.sh` script as described in the main README.
-
-3. Deploy EJFAT workflows using the instructions in this document.
-
-By following these steps, you can create a comprehensive workflow setup across different environments, all monitored by a single Prometheus instance.
-
 ## Additional Files
 
-- [`job-deployment.yaml`](main/local-ejfat/job/job-deployment.yaml): Defines the Kubernetes Deployment
-- [`.helmignore`](main/local-ejfat/job/.helmignore): Specifies files to ignore in the Helm chart
-- [`_helpers.tpl`](main/local-ejfat/job/templates/_helpers.tpl): Contains helper templates for the chart
-- [`node-setup.sh`](main/local-ejfat/init-jrm/node-setup.sh): Script for setting up EJFAT nodes
-- [`launch-nodes.sh`](main/local-ejfat/init-jrm/launch-nodes.sh): Script for launching EJFAT nodes
+- `job-deployment.yaml`: Defines the Kubernetes Deployment
+- `.helmignore`: Specifies files to ignore in the Helm chart
+- `_helpers.tpl`: Contains helper templates for the chart
+- `node-setup.sh`: Script for setting up EJFAT nodes
+- `launch-nodes.sh`: Script for launching EJFAT nodes
 
 These files provide additional configuration and setup options for the EJFAT environment.

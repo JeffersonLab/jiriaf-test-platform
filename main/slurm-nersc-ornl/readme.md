@@ -126,15 +126,19 @@ The charts support different configurations for Perlmutter and ORNL sites. This 
 
 The charts set up Prometheus monitoring. The [`prom-servicemonitor.yaml`](main/slurm-nersc-ornl/job/templates/prom-servicemonitor.yaml) file defines how Prometheus should scrape metrics from your jobs.
 
-## 9. Cleanup
+## 9. Check and Delete Deployed Jobs
 
+To check the jobs that are deployed, use:
+```shell
+helm ls
+```
 To delete a deployed job, use:
 
 ```shell
-helm uninstall <ID>-job-<SITE>-<NUMBER>
+helm uninstall $ID-job-$SITE-<number>
 ```
 
-Replace `<ID>-job-<SITE>-<NUMBER>` with the name used during installation (e.g., `jlab-100g-nersc-ornl-job-perlmutter-0`).
+Replace `$ID-job-$SITE-<number>` with the name used during installation (e.g., `$ID-job-$SITE-<number>`).
 
 ## 10. Troubleshooting
 
