@@ -50,7 +50,7 @@ This approach allows for easy scaling and management of port assignments across 
 Use the [`launch_job.sh`](main/slurm-nersc-ornl/launch_job.sh) script to deploy a job:
 
 ```shell
-./launch_job.sh <ID> <INDEX> <SITE> <ersap-exporter-port> <jrm-exporter-port>
+./launch_job.sh <ID> <INDEX> <SITE> <ERSAP_EXPORTER_PORT> <JRM_EXPORTER_PORT>
 ```
 
 Example:
@@ -131,10 +131,10 @@ The charts set up Prometheus monitoring. The [`prom-servicemonitor.yaml`](main/s
 To delete a deployed job, use:
 
 ```shell
-helm uninstall <release-name> -n <namespace>
+helm uninstall <ID>-job-<SITE>-<NUMBER> -n <namespace>
 ```
 
-Replace `<release-name>` with the name used during installation (e.g., `jlab-100g-nersc-ornl-job-0`).
+Replace `<ID>-job-<SITE>-<NUMBER>` with the name used during installation (e.g., `jlab-100g-nersc-ornl-job-perlmutter-0`).
 
 ## 10. Troubleshooting
 
