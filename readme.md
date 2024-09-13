@@ -15,10 +15,11 @@ Before you begin, ensure you have the following prerequisites in place:
 2. Kubernetes cluster set up and configured.
 3. Helm 3.x installed on your local machine.
 4. `kubectl` command-line tool installed and configured to interact with your Kubernetes cluster.
-5. Access to the JIRIAF Fireworks repository (https://github.com/JeffersonLab/jiriaf-fireworks).
-6. Sufficient permissions to deploy services and create namespaces in the Kubernetes cluster.
-7. Basic understanding of Kubernetes, Helm, and SLURM concepts.
-8. SSH access to relevant nodes (EJFAT, Perlmutter, ORNL) for deployment and troubleshooting.
+5. Prometheus Operator installed on your Kubernetes cluster.
+6. Access to the JIRIAF Fireworks repository (https://github.com/JeffersonLab/jiriaf-fireworks).
+7. Sufficient permissions to deploy services and create namespaces in the Kubernetes cluster.
+8. Basic understanding of Kubernetes, Helm, and SLURM concepts.
+9. SSH access to relevant nodes (EJFAT, Perlmutter, ORNL) for deployment and troubleshooting.
 
 Ensure all these prerequisites are met before proceeding with the workflow setup and deployment.
 
