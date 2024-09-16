@@ -16,16 +16,16 @@ The following flow chart provides a high-level overview of the process for using
 This chart illustrates the main steps involved in deploying and managing jobs using the slurm-nersc-ornl Helm charts, from initial setup through job submission.
 
 
-## Step 1: Setup Environment
-Clone the repository and navigate to the `slurm-nersc-ornl` folder:
+1. **Setup Environment**
+   Clone the repository and navigate to the `slurm-nersc-ornl` folder:
    ```bash
    git clone https://github.com/JeffersonLab/jiriaf-test-platform.git
    cd jiriaf-test-platform/main/slurm-nersc-ornl
    ```
 
-## Step 2: Customize the Deployment
-1. Open `job/values.yaml`
-2. Edit key settings, focusing on port configuration:
+2. **Customize the Deployment**
+   Open `job/values.yaml`
+   Edit key settings, focusing on port configuration:
    ```
    ersap-exporter-port (base): 20000
    │
@@ -39,55 +39,54 @@ Clone the repository and navigate to the `slurm-nersc-ornl` folder:
    ```
    This structure allows easy scaling and management of port assignments.
 
-## Step 3: Deploy Prometheus (If not already running)
-1. Refer to `main/prom/readme.md` for detailed instructions on installing and configuring Prometheus.
+3. **Deploy Prometheus (If not already running)**
+    1. Refer to `main/prom/readme.md` for detailed instructions on installing and configuring Prometheus.
 
-2. Check if a Prometheus instance is already running for your project:
-```bash
-helm ls | grep "$ID-prom"
-```
-If this command returns no results, it means there's no Prometheus instance for your project ID.
+    2. Check if a Prometheus instance is already running for your project:
+    ```bash
+    helm ls | grep "$ID-prom"
+    ```
+    If this command returns no results, it means there's no Prometheus instance for your project ID.
 
-3. If needed, install a new Prometheus instance for your project:
-```bash
-cd main/prom
-helm install $ID-prom prom/ --set Deployment.name=$ID
-```
+    3. If needed, install a new Prometheus instance for your project:
+    ```bash
+    cd main/prom
+    helm install $ID-prom prom/ --set Deployment.name=$ID
+    ```
+    4. Verify the Prometheus deployment before proceeding to the next step.
 
-4. Verify the Prometheus deployment before proceeding to the next step.
+4. **Launch a Job**
+    Use the `launch_job.sh` script:
 
-## Step 4: Launch a Job
-Use the `launch_job.sh` script:
+    1. Open a terminal
+    2. Navigate to the chart directory
+    3. Run:
+    ```shell
+    ./launch_job.sh <ID> <INDEX> <SITE> <ERSAP_EXPORTER_PORT> <JRM_EXPORTER_PORT>
+    ```
+    Example:
+    ```shell
+    ./launch_job.sh jlab-100g-nersc-ornl 0 perlmutter 20000 10000
+    ```
 
-1. Open a terminal
-2. Navigate to the chart directory
-3. Run:
-   ```shell
-   ./launch_job.sh <ID> <INDEX> <SITE> <ERSAP_EXPORTER_PORT> <JRM_EXPORTER_PORT>
-   ```
-   Example:
-   ```shell
-   ./launch_job.sh jlab-100g-nersc-ornl 0 perlmutter 20000 10000
-   ```
+5. **Custom Port Configuration (if needed)**:
+   1. Edit `launch_job.sh`
+   2. Replace port calculations with desired numbers:
+    ```bash
+    ERSAP_EXPORTER_PORT=20000
+    PROCESS_EXPORTER_PORT=20001
+    EJFAT_EXPORTER_PORT=20002
+    ERSAP_QUEUE_PORT=20003
+    ```
+   3. Save and run the script as described above
 
-### Custom Port Configuration (if needed):
-1. Edit `launch_job.sh`
-2. Replace port calculations with desired numbers:
-   ```bash
-   ERSAP_EXPORTER_PORT=20000
-   PROCESS_EXPORTER_PORT=20001
-   EJFAT_EXPORTER_PORT=20002
-   ERSAP_QUEUE_PORT=20003
-   ```
-3. Save and run the script as described above
-
-## Step 4: Submit Batch Jobs (Optional)
-For multiple jobs:
-1. Use `batch-job-submission.sh`:
+6. **Submit Batch Jobs (Optional)**
+   For multiple jobs:
+   1. Use `batch-job-submission.sh`:
    ```shell
    ./batch-job-submission.sh <TOTAL_NUMBER>
    ```
-2. Script parameters:
+   2. Script parameters:
    - `ID`: Base job identifier (default: "jlab-100g-nersc-ornl")
    - `SITE`: Deployment site ("perlmutter" or "ornl", default: "perlmutter")
    - `ERSAP_EXPORTER_PORT_BASE`: Base ERSAP exporter port (default: 20000)

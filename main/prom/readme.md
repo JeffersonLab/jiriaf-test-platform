@@ -10,9 +10,26 @@ Ensure your Kubernetes cluster has:
 2. [Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server#installation)
 3. [Helm](https://helm.sh/docs/intro/install/)
 
+
+## Deployment Flow Chart
+
+Below is a visual representation of the Prometheus deployment process:
+
+![Prometheus Deployment Flow Chart](../../image/prometheus_deployment_flow_chart.png)
+
+This flow chart illustrates the key steps in deploying Prometheus monitoring using the Prometheus Operator.
+
+
 ## Deployment Steps
 
-1. **Install Prometheus Operator**:
+1. **Setup Environment**:
+   Clone the repository and navigate to the `prom` folder:
+   ```bash
+   git clone https://github.com/JeffersonLab/jiriaf-test-platform.git
+   cd jiriaf-test-platform/main/prom
+   ```
+
+2. **Install Prometheus Operator**:
    First, we need to install the Prometheus Operator:
 
    a. Create a namespace for monitoring:
