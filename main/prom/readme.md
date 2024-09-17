@@ -29,30 +29,34 @@ This flow chart illustrates the key steps in deploying Prometheus monitoring usi
    cd jiriaf-test-platform/main/prom
    ```
 
-2. **Install Prometheus Operator**:
-   First, we need to install the Prometheus Operator:
+2. **Install Prometheus Operator and CRDs**:
+   Instead of using Helm, we'll use the community-maintained manifests from the kube-prometheus project:
 
-   a. Create a namespace for monitoring:
+   a. Clone the kube-prometheus repository (release-0.10 for Kubernetes 1.23 compatibility):
       ```bash
-      kubectl create namespace monitoring
+      git clone --depth 1 https://github.com/prometheus-operator/kube-prometheus.git /tmp/kube-prometheus
       ```
 
-   b. Add the Prometheus Operator Helm repository:
+   b. Copy the manifests to your current directory:
       ```bash
-      helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-      helm repo update
+      cp -R /tmp/kube-prometheus/manifests .
       ```
 
-   c. Install the Prometheus Operator:
+   c. Create the Custom Resource Definitions (CRDs) and Prometheus Operator:
       ```bash
-      helm install prometheus-operator prometheus-community/kube-prometheus-stack -n monitoring
+      kubectl create -f ./manifests/setup/
       ```
 
-   d. Verify the installation:
+   d. Apply the remaining manifests:
       ```bash
-      kubectl get pods -n monitoring
+      kubectl create -f ./manifests/
       ```
 
+   e. Verify the installation:
+      ```bash
+      kubectl -n monitoring get pods
+      ```
+   
 2. **Configure Values**: 
    Edit `values.yaml` to set your specific configuration:
 
