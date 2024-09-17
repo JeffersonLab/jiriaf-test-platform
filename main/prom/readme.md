@@ -6,7 +6,7 @@ This guide outlines the deployment process for a custom Prometheus monitoring se
 
 Ensure your Kubernetes cluster has:
 
-1. [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator#quickstart)
+1. [Prometheus Operator](hhttps://github.com/prometheus-operator/kube-prometheus)
 2. [Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server#installation)
 3. [Helm](https://helm.sh/docs/intro/install/)
 
