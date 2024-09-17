@@ -35,19 +35,25 @@ This directory contains scripts for initializing JRMs on EJFAT nodes.
    - Ensure you have SSH access to the EJFAT nodes you intend to initialize.
    - Verify that Docker is installed and running on each EJFAT node. The script requires Docker to pull and run necessary images.
 
-5. **Run the Launch Script**
+5. **Copy kubeconfig file to EJFAT nodes**
+   Copy the kubeconfig file to the EJFAT nodes:
+   For example, to copy to ejfat-2:
+   ```bash
+   scp ~/.kube/config ejfat-2:/home/jlabtsai/.kube/config
+   ```
+
+6. **Run the Launch Script**
    Execute the `launch-nodes.sh` script:
    ```bash
    ./launch-nodes.sh
    ```
-
-6. **Script Execution Process**
+   *Script Execution Process*
    For each selected node, the script will:
    - Set up an SSH tunnel for port forwarding.
    - Copy `node-setup.sh` to the target node.
    - Execute `node-setup.sh` on the node with appropriate parameters.
 
-7. **Wait for Completion**
+   *Wait for Completion*
    The script will wait for all node setup processes to complete.
 
 ## Special Cases
