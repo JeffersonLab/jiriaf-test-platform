@@ -84,6 +84,10 @@ This diagram provides a visual representation of the steps involved in setting u
      - `ID`: The project identifier (e.g., jlab-100g-nersc-ornl)
      - `INDEX`: A unique index for the job (e.g., 2)
 
+   - This script will create two containers on EJFAT node:
+     - jlabtsai/process-exporter:pgid-go
+     - gurjyan/ersap:v0.1
+
 
 6. **Monitor Deployment:**
    - Check Helm release: `helm ls | grep $ID-job-ejfat-$INDEX`
