@@ -114,6 +114,15 @@ This flow chart illustrates the key steps in deploying Prometheus monitoring usi
       ```
    c. Access Grafana at `http://localhost:3000` (default credentials: admin/admin)
 
+6. **Remove Prometheus Helm Chart** (if needed):
+   Notice this will remove the persistent volume claim, and the data will be lost.
+   ```bash
+   # 1. Remove the persistent volume claim
+   kubectl delete pvc -n monitoring prometheus-<project-id>-db-prometheus-<project-id>-0
+   # 2. Remove the Prometheus Helm Chart
+   helm uninstall <project-id>-prom
+   ```
+
 ## Components Deployed
 
 - Prometheus Server (`prometheus.yaml`)
