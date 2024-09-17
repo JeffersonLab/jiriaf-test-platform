@@ -115,6 +115,7 @@ This flow chart illustrates the key steps in deploying Prometheus monitoring usi
    c. Access Grafana at `http://localhost:3000` (default credentials: admin/admin)
 
 6. **Remove Prometheus Helm Chart** (if needed):
+   
    Notice this will remove the persistent volume claim, and the data will be lost.
    ```bash
    # 1. Remove the persistent volume claim
