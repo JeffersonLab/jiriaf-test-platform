@@ -10,7 +10,14 @@ do
         i="fs"
     fi
     ssh -NfR $APISERVER_PORT:localhost:$APISERVER_PORT fab-50
-    ssh -NfL *:1990:localhost:1990 fab-50
+    ssh -NfL *:11990:localhost:11990 fab-50
+
+    ssh -NfL *:42221:localhost:2221 fab-50
+    ssh -NfL *:41776:localhost:1776 fab-50
+    ssh -NfL *:48088:localhost:8088 fab-50
+    ssh -NfL *:41990:localhost:1990 fab-50
+    ssh -NfL *:42222:localhost:2222 fab-50
+
 
     scp -r $(dirname "$0")/node-setup.sh fab-50:~/
 
