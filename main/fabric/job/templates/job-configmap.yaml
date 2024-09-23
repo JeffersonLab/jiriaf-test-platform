@@ -28,7 +28,7 @@ data:
 
     # Define the PR and LB hosts
     export PR_HOST=23.134.232.50
-    export LB_HOST=129.57.177.135
+    export LB_HOST=192.188.29.17 #192.188.29.17
     echo "LB_HOST: $LB_HOST, PR_HOST: $PR_HOST"
 
     # Pull and run the docker image

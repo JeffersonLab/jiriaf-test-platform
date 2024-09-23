@@ -4,7 +4,7 @@ Deployment:
   replicas: 1
   serviceMonitorLabel: ersap-test4 # this is the label for the serviceMonitor. It can be the same for multiple deployments if using a single prometheus instance.
 
-  cpuUsage: "128"
+  cpuUsage: "64"
   ejfatNode: "2"
 
   ersapSettings:
@@ -13,33 +13,33 @@ Deployment:
     file: /x.ersap
 
 Service:
+- name: jrm-exporter
+  protocol: TCP
+  port: {{ add 10000 .Values.Deployment.ejfatNode }}
+  originalPort: {{ add 10000 .Values.Deployment.ejfatNode }}
+  path: /metrics/resource
+  interval: 15s
 - name:  ersap-exporter
   protocol: TCP
-  port:  2221
+  port: {{ add 20000 .Values.Deployment.ejfatNode }}
   originalPort: 2221
   path: /metrics
   interval: 15s
 - name: process-exporter
   protocol: TCP
-  port: 1776
+  port: {{ add 30000 .Values.Deployment.ejfatNode }}
   originalPort: 1776
   path: /metrics
   interval: 15s
 - name: ejfat-exporter
   protocol: TCP
-  port: 8088
+  port: {{ add 40000 .Values.Deployment.ejfatNode }}
   originalPort: 8088
   path: /metrics
   interval: 15s
-- name: jrm-exporter
-  protocol: TCP
-  port:  1990
-  originalPort: 1990
-  path: /metrics/resource
-  interval: 15s
 - name: ersap-queue
   protocol: TCP
-  port:  2222
+  port:  {{ add 50000 .Values.Deployment.ejfatNode }}
   originalPort: 2222
   path: /metrics/resource
   interval: 15s

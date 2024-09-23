@@ -23,9 +23,9 @@ spec:
           mountPath: wf
         resources:
           limits:
-            cpu: "64"
+            cpu: {{ .Values.Deployment.cpuUsage }}
           requests:
-            cpu: "64"
+            cpu: {{ .Values.Deployment.cpuUsage }}
       - name: prom
         image: prom
         command: ["bash"]

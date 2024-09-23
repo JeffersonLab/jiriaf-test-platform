@@ -1,10 +1,10 @@
 #!/bin/bash
 
-export NODENAME="jrm-fabric"
+export NODENAME="jrm-fabric-$1"
 export KUBECONFIG="$HOME/.kube/config"
 export VKUBELET_POD_IP="172.17.0.1"
 # set kubelet port as 10000 + $1
-export KUBELET_PORT=11990  #$((10000 + $1))
+export KUBELET_PORT=1000$1
 
 export JIRIAF_WALLTIME="0" # "0" if no limit
 export JIRIAF_NODETYPE="cpu"
