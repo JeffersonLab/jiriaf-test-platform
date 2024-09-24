@@ -2,16 +2,16 @@
 
 export APISERVER_PORT="38687" #35679
 
-for i in $(seq 1 2)
+for i in $(seq 0 0)
 do
     node_name="fab-5$i"
     echo "Launching node $node_name"
     ssh -NfR $APISERVER_PORT:localhost:$APISERVER_PORT $node_name
-    ssh -NfL *:$((10000 + $i)):localhost:$((10000 + $i)) $node_name 
-    ssh -NfL *:$((20000 + $i)):localhost:2221 $node_name
-    ssh -NfL *:$((30000 + $i)):localhost:1776 $node_name
-    ssh -NfL *:$((40000 + $i)):localhost:8088 $node_name
-    ssh -NfL *:$((50000 + $i)):localhost:2222 $node_name
+    ssh -NfL *:$((11000 + $i)):localhost:$((11000 + $i)) $node_name 
+    ssh -NfL *:$((21000 + $i)):localhost:2221 $node_name
+    ssh -NfL *:$((31000 + $i)):localhost:1776 $node_name
+    ssh -NfL *:$((41000 + $i)):localhost:8088 $node_name
+    ssh -NfL *:$((51000 + $i)):localhost:2222 $node_name
 
 
     scp -r $(dirname "$0")/node-setup.sh $node_name:~/
