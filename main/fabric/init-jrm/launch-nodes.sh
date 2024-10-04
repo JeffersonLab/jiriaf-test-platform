@@ -2,9 +2,9 @@
 
 export APISERVER_PORT="38687" #35679
 
-for i in $(seq 0 0)
+for i in $(seq 2 2)
 do
-    node_name="fab-5$i"
+    node_name="ubuntu@23.134.232.5$i"
     echo "Launching node $node_name"
     ssh -NfR $APISERVER_PORT:localhost:$APISERVER_PORT $node_name
     ssh -NfL *:$((11000 + $i)):localhost:$((11000 + $i)) $node_name 
