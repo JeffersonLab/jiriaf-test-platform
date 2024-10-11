@@ -23,9 +23,9 @@ spec:
           mountPath: wf
         resources:
           limits:
-            cpu: {{ if eq .Values.Deployment.site "perlmutter" }}"256"{{ else if eq .Values.Deployment.site "ornl" }}"128"{{ else if contains "fabric" .Values.Deployment.site }}"64"{{ else }}"256"{{ end }}
+            cpu: {{ .Values.Deployment.cpuUsage }}
           requests:
-            cpu: {{ if eq .Values.Deployment.site "perlmutter" }}"256"{{ else if eq .Values.Deployment.site "ornl" }}"128"{{ else if contains "fabric" .Values.Deployment.site }}"64"{{ else }}"256"{{ end }}
+            cpu: {{ .Values.Deployment.cpuUsage }}
       - name: prom
         image: prom
         command: ["bash"]
@@ -60,7 +60,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: jiriaf.site
+              - key: kubernetes.io/hostname
                 operator: In
                 values:
-                - {{ .Values.Deployment.site}}
+                - "jrm-fabric-{{ .Values.Deployment.ejfatNode }}"

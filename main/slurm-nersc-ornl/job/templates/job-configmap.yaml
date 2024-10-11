@@ -11,6 +11,51 @@ data:
     # job-configmap.yaml
     {{- if eq .Values.Deployment.site "perlmutter" }}
         shifter --image=gurjyan/ersap:v0.1 -- /ersap/run-pipeline.sh
+
+    {{- else if contains "fabric" .Values.Deployment.site }}
+      docker rm -f vk-exporter vd-ersap
+      # Define the namespace directory
+      NAMESPACE_DIR=~/{{ .Values.Deployment.namespace }}
+
+      # Find the most recently modified directory in the namespace directory
+      for dir in $(ls -t $NAMESPACE_DIR); do
+        if [ -d $NAMESPACE_DIR/$dir ]; then
+          # Set the pod root path to the most recently modified directory
+          export POD_ROOT_PATH=$NAMESPACE_DIR/$dir
+          echo "POD_ROOT_PATH: $POD_ROOT_PATH"
+          break
+        fi
+      done
+
+      # Define the PR and LB hosts
+      export PR_HOST=$(hostname -I | awk '{print $2}')
+      export LB_HOST=192.188.29.6 #192.188.29.17
+      echo "LB_HOST: $LB_HOST, PR_HOST: $PR_HOST"      
+      docker run --name vd-ersap -d --rm --net=host -e "LB_HOST=$LB_HOST" -e "PR_HOST=$PR_HOST" --entrypoint=/ersap/run-pipeline.sh gurjyan/ersap:v0.1
+      # Get the ID of the last run container
+      export CONTAINER_ID=$(docker ps -l -q)
+
+      # Store the container ID for later use
+      echo $CONTAINER_ID > $POD_ROOT_PATH/containers/wf/containerid
+
+      # Wait for the container to start
+      sleep 10
+
+      # Get the process group ID (PGID) of the process in the container with "UseNUMA" in its command
+      export PGID=$(docker top $CONTAINER_ID -eo pid,cmd | grep UseNUMA | awk '{print $1}')
+
+      # Store the PGID for later use
+      echo $PGID > $POD_ROOT_PATH/containers/wf/pgid
+      echo "PGID: $PGID"
+
+      # Keep the container running
+      CONTAINER_ID=$(docker ps -q --filter "name=vd-ersap")
+      if [ ! -z "$CONTAINER_ID" ]; then
+          echo "Keeping vd-ersap container alive"
+          while docker ps -q --filter "id=$CONTAINER_ID" >/dev/null; do
+              sleep 60
+          done
+      fi
     {{- else }}
         export PR_HOST=$(hostname -I | awk '{print $2}')
         apptainer run ~/ersap_v0.1.sif -- /ersap/run-pipeline.sh
@@ -46,6 +91,9 @@ data:
     sleep 15
     {{- if eq .Values.Deployment.site "perlmutter" }}
         shifter --image=jlabtsai/process-exporter:pgid-go -V /proc:/host_proc --entrypoint
+    {{- else if contains "fabric" .Values.Deployment.site }}
+        docker run --name vk-exporter -d -e GROUP_FOR_CONFIG=$GROUP_FOR_CONFIG -e CMDS_FOR_CONFIG=$CMDS_FOR_CONFIG -e PROCESS_EXPORTER_PORT=$PROCESS_EXPORTER_PORT \
+         --net=host -v /proc:/host_proc jlabtsai/process-exporter:pgid-go
     {{- else }}
         apptainer run --bind /proc:/host_proc ~/process-exporter_pgid-go.sif
     {{- end }}

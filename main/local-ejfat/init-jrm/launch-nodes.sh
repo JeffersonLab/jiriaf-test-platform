@@ -2,7 +2,7 @@
 
 export APISERVER_PORT="38687" #35679
 
-for i in $(seq 2 2)
+for i in $(seq 1 1)
 do
     i_padded=$(printf "%02d" $i)
     # if i is 7, then rename i as "fs"

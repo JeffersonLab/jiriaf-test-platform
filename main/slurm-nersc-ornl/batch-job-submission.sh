@@ -2,12 +2,12 @@
 
 # Base values
 ID="jlab-100g-nersc-ornl"
-SITE="perlmutter" #ornl
-ERSAP_EXPORTER_PORT_BASE=20000 #20160
-JRM_EXPORTER_PORT_BASE=10000 #10040
+SITE="ornl" #ornl
+ERSAP_EXPORTER_PORT_BASE=20012   #20160
+JRM_EXPORTER_PORT_BASE=10003 #10040
 
 # Total number from argument
-TOTAL_NUMBER=2
+TOTAL_NUMBER=1
 
 # Loop to run the script from 0 to total number - 1
 for ((i=0; i<TOTAL_NUMBER; i++)); do
