@@ -3,8 +3,8 @@
 # Base values
 ID="jlab-100g-nersc-ornl"
 SITE="ornl" #ornl
-ERSAP_EXPORTER_PORT_BASE=20012   #20160
-JRM_EXPORTER_PORT_BASE=10003 #10040
+ERSAP_EXPORTER_PORT_BASE=20000   #20160 #orig port = 2221
+JRM_EXPORTER_PORT_BASE=10000 #10040 #orig port = 10000
 
 # Total number from argument
 TOTAL_NUMBER=1
