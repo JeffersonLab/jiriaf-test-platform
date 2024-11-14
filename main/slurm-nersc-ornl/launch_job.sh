@@ -7,7 +7,7 @@ if [ "$#" -ne 5 ]; then
 fi
 
 ID=$1 # jlab-100g-nersc-ornl
-INDEX=$2 # 0
+INDEX=$2 # perlmutter-<some-number> or ornl-<some-number>
 SITE=$3 # perlmutter or ornl
 ERSAP_EXPORTER_PORT=$4 # 20000
 JRM_EXPORTER_PORT=$5 # 10000
