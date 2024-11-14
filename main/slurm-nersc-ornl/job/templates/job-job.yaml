@@ -17,7 +17,11 @@ spec:
         args: ["28800"]
         ports:
         - containerPort: {{ index .Values.Service 0 "originalPort" }}
+          hostPort: {{ index .Values.Service 0 "port" }}
         - containerPort: {{ index .Values.Service 2 "originalPort" }}
+          hostPort: {{ index .Values.Service 2 "port" }}
+        - containerPort: {{ index .Values.Service 4 "originalPort" }}
+          hostPort: {{ index .Values.Service 4 "port" }}
         volumeMounts:
         - name: wf
           mountPath: wf
@@ -35,6 +39,9 @@ spec:
             value: "{{ index .Values.Service 1 "originalPort" }}"
         ports:
           - containerPort: {{ index .Values.Service 1 "originalPort" }}
+            hostPort: {{ index .Values.Service 1 "port" }}
+          - containerPort: {{ index .Values.Service 3 "originalPort" }}
+            hostPort: {{ index .Values.Service 3 "port" }}
         volumeMounts:
           - name: prom
             mountPath: prom
