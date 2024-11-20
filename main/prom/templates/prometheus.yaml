@@ -35,7 +35,7 @@ spec:
   storage:
     volumeClaimTemplate:
       spec:
-        storageClassName: local-storage-{{ .Values.Deployment.name}}
+        storageClassName: scratch-storage-{{ .Values.Deployment.name }}
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:

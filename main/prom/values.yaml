@@ -3,9 +3,10 @@ Deployment:
   namespace: default
 
 PersistentVolume:
-  node: jiriaf2302-control-plane
-  path: /var/prom
-  size: 5Gi
+  node: jiriaf2301-control-plane
+  mountPath: /scratch
+  path: /scratch/prom
+  size: 10Gi
   
 Prometheus:
   serviceaccount: prometheus-k8s
