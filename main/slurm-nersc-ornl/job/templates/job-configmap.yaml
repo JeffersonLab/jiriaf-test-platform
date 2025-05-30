@@ -9,8 +9,10 @@ data:
     # export LB_HOST=$1
     # export PR_HOST=$2
     # job-configmap.yaml
+    # shifter --image=gurjyan/ersap:v0.1 -- /ersap/run-pipeline-back.sh
+
     {{- if eq .Values.Deployment.site "perlmutter" }}
-        shifter --image=gurjyan/ersap:v0.1 -- /ersap/run-pipeline.sh
+        shifter --image=gurjyan/ersap:v0.2 -- /ersap/run-pipeline.sh
 
     {{- else if contains "fabric" .Values.Deployment.site }}
       docker rm -f vk-exporter vd-ersap
